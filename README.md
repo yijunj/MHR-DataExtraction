@@ -7,7 +7,7 @@ This project starts with unpacked game data, so rather than working on the .pak 
 
 * Download raw data files from a hacked Switch. These Youtube videos can be helpful: [recovery mode](https://www.youtube.com/watch?v=3-UeB_enPrM), [get product keys](https://www.youtube.com/watch?v=2LyNjylC7yY), and [get .xci file](https://www.youtube.com/watch?v=PGjEyI_YFuo&t=440s) 
 * Merge raw files into one .xci file. Merging is as easy as running the `copy /b "File1.xc0" + "File2.xc1" "FileOutput.xci"` command.
-* Use [hactool](https://github.com/SciresM/hactool) to unpack the .xci file and obtain the .pak file (default name is re_chunk_000.pak).
+* Use [hactool](https://github.com/SciresM/hactool) to unpack the .xci file and obtain a .pak file (default name is re_chunk_000.pak).
 * Use [REtool](https://residentevilmodding.boards.net/thread/10567/pak-tex-editing-tool) to unpack the .pak file and obtain the file structure. You will need a file list, which can be found [here](https://raw.githubusercontent.com/mhvuze/MonsterHunterRiseModding/main/files/mhrise.list). Save the following codes as a batch (.bat) file and drag your .pak file over it to unpack.
 ```@setlocal enableextensions
 @pushd %~dp0
