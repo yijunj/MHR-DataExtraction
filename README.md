@@ -8,4 +8,4 @@ This project starts with unpacked game data, so rather than working on the .pak 
 * Download raw data files from a hacked Switch.
 * Merge raw files into one .xci file.
 * Use hactool to unpack the .xci file and obtain the .pak file (default name is re_chunk_000.pak).
-* Use REtool to unpack the .pak file and obtain a file structure.
+* Use REtool to unpack the .pak file and obtain the file structure.
