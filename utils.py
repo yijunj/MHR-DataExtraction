@@ -45,7 +45,6 @@ class OrderedAttibuteClass(object):
     # For numeric lists, game data always starts with a piece that says how many entries the list has
     # which is usually stored it 32 bits, but could also be less than that
     # In this case, the list is initialized as, say, ['u8, 'u16'], meaning 'list of u8 data, beginning with u16 entry count'
-    # i.e. entry count is written in
     # There are also cases where the game file skips until the next multiple of, say, 128 bits
     # In this case, I create a dummy attribute initialized to, say 'p128'
     # The user file reader moves the cursor to the appropriate location when it sees this
