@@ -1,9 +1,10 @@
-# Preparing SD card
-## Install/Update Atmosphere and Hekate
+# How to dump Switch game files
+## Preparing SD card
+### Install/Update Atmosphere and Hekate
 Atmosphere is like the operation system of CFW mode, and Hekate is how you boot Switch into Atmosphere.
 Copied from https://nh-server.github.io/switch-guide/extras/updating/
 
-### Updating Atmosphere
+#### Updating Atmosphere
 When a new version of Atmosphere releases, you can update Atmosphere by following these steps:
 
 Turn off your Nintendo Switch and plug your SD card in your computer.
@@ -19,7 +20,7 @@ If you are prompted to overwrite files, do so.
 (If your hekate is not on the latest version) Update hekate via the steps below.
 Put your SD card back in your Switch and launch CFW.
 
-### Updating Hekate
+#### Updating Hekate
 When a new version of Hekate releases, you can update by following these steps:
 
 Turn off your Nintendo Switch and plug your SD card in your computer.
@@ -28,25 +29,25 @@ Copy the bootloader folder from the Hekate .zip file to the root of your SD card
 Put your SD card back in your Switch and launch Hekate.
 Go to the Options tab at the top right of the screen. Turn "Update Reboot 2 Payload" on the bottom right ON (if it isn't on already). Tap "Save Options" at the bottom of the screen.
 
-### Homebrew Appstore
+#### Homebrew Appstore
 https://github.com/fortheusers/hb-appstore/releases
 Switch: copy appstore.nro to sd:/switch/appstore/appstore.nro
 
-### Keys
+#### Keys
 Make sure prod.keys and title.keys are under an SD card directory named "switch". If you don't have the keys, you need to dump them first by launching Lockpick_RCM.bin from Hekate.
 
-# Launch Hekate
-## Boot into recovery mode
+## Launch Hekate
+### Boot into recovery mode
 With Switch turned off, ground the correct pins on the right controller slot. Connect Switch to PC through USB, open TegraRcmGUI on PC. The Switch icon should be red saying "NO RCM".
 Press volume up button and power button on Switch to boot into RCM (recovery mode). The Switch should show black screen, but TegraRcmGUI should turn green saying "RCM OK".
 Inject the Hekate payload. This launches Hekate on Switch.
 
-# Launch Atmosphere
+## Launch Atmosphere
 In Hekate, click Launch then choose fusee.bin. Now you can unground the pins and put back joy-cons.
 
 Useful apps to dump files (here I use NXDumpTool) are in the hbmenu by pressing the Album button. If it's not installed, you need to connect to the internet and install via Homebrew App Store.
 
-# Using NXDumpTool
+## Using NXDumpTool
 Copied from https://zeldamods.org/wiki/Help:Dumping_games
 
 Dump the game files directly to your SD card using nxdumptool. Update data can only be processed if the base game is available, because they share the same filesystem. DLCs don't, so they have to be dumped separately.
