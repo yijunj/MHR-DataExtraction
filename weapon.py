@@ -337,34 +337,24 @@ class WeaponList(OrderedAttibuteClass):
         self.get_tree()
 
     def get_base_data(self):
-        data = BitStream(filename = 'user\\weapon\\{}\\{}BaseData.user.2'.format(self.weapon_type, self.weapon_type))
-        data = user.read_usr_head(data)
-        data_type_list, data = user.read_rsz_head(data)
-        self.base_data, _ = user.read_rsz(data_type_list, data)
+        filename = 'user\\weapon\\{}\\{}BaseData.user.2'.format(self.weapon_type, self.weapon_type)
+        self.base_data = user.read_user_file(filename)
 
     def get_product(self):
-        data = BitStream(filename = 'user\\weapon\\{}\\{}ProductData.user.2'.format(self.weapon_type, self.weapon_type))
-        data = user.read_usr_head(data)
-        data_type_list, data = user.read_rsz_head(data)
-        self.product, _ = user.read_rsz(data_type_list, data)
+        filename = 'user\\weapon\\{}\\{}ProductData.user.2'.format(self.weapon_type, self.weapon_type)
+        self.product = user.read_user_file(filename)
 
     def get_change(self):
-        data = BitStream(filename = 'user\\weapon\\{}\\{}ChangeData.user.2'.format(self.weapon_type, self.weapon_type))
-        data = user.read_usr_head(data)
-        data_type_list, data = user.read_rsz_head(data)
-        self.change, _ = user.read_rsz(data_type_list, data)
+        filename = 'user\\weapon\\{}\\{}ChangeData.user.2'.format(self.weapon_type, self.weapon_type)
+        self.change = user.read_user_file(filename)
 
     def get_process(self):
-        data = BitStream(filename = 'user\\weapon\\{}\\{}ProcessData.user.2'.format(self.weapon_type, self.weapon_type))
-        data = user.read_usr_head(data)
-        data_type_list, data = user.read_rsz_head(data)
-        self.process, _ = user.read_rsz(data_type_list, data)
+        filename = 'user\\weapon\\{}\\{}ProcessData.user.2'.format(self.weapon_type, self.weapon_type)
+        self.process = user.read_user_file(filename)
 
     def get_tree(self):
-        data = BitStream(filename = 'user\\weapon\\{}\\{}UpdateTreeData.user.2'.format(self.weapon_type, self.weapon_type))
-        data = user.read_usr_head(data)
-        data_type_list, data = user.read_rsz_head(data)
-        self.tree, _ = user.read_rsz(data_type_list, data)
+        filename = 'user\\weapon\\{}\\{}UpdateTreeData.user.2'.format(self.weapon_type, self.weapon_type)
+        self.tree = user.read_user_file(filename)
 
 if __name__ == '__main__':
     weapon_type_list = ['GreatSword', 'ShortSword', 'Hammer', 'Lance', 'LongSword', 'SlashAxe', 'GunLance',\

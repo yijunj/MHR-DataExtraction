@@ -22,91 +22,75 @@ class Monster(OrderedAttibuteClass):
 
     def get_data_base(self):
         if self.is_large_monster:
-            data = BitStream(filename = 'user\\monster\\em{:03}\\{:02}\\em{:03}_{:02}_database.user.2'\
-                .format(self.id, self.sub_id, self.id, self.sub_id))
+            filename = 'user\\monster\\em{:03}\\{:02}\\em{:03}_{:02}_database.user.2'\
+                .format(self.id, self.sub_id, self.id, self.sub_id)
         else:
-            data = BitStream(filename = 'user\\monster\\ems{:03}\\{:02}\\ems{:03}_{:02}_database.user.2'\
-                .format(self.id, self.sub_id, self.id, self.sub_id))
-        data = user.read_usr_head(data)
-        data_type_list, data = user.read_rsz_head(data)
-        self.data_base, _ = user.read_rsz(data_type_list, data)
+            filename = 'user\\monster\\ems{:03}\\{:02}\\ems{:03}_{:02}_database.user.2'\
+                .format(self.id, self.sub_id, self.id, self.sub_id)
+        self.data_base = user.read_user_file(filename)
 
     def get_data_tune(self):
         if self.is_large_monster:
-            data = BitStream(filename = 'user\\monster\\em{:03}\\{:02}\\em{:03}_{:02}_datatune.user.2'\
-                .format(self.id, self.sub_id, self.id, self.sub_id))
+            filename = 'user\\monster\\em{:03}\\{:02}\\em{:03}_{:02}_datatune.user.2'\
+                .format(self.id, self.sub_id, self.id, self.sub_id)
         else:
-            data = BitStream(filename = 'user\\monster\\ems{:03}\\{:02}\\ems{:03}_{:02}_datatune.user.2'\
-                .format(self.id, self.sub_id, self.id, self.sub_id))
-        data = user.read_usr_head(data)
-        data_type_list, data = user.read_rsz_head(data)
-        self.data_tune, _ = user.read_rsz(data_type_list, data)
+            filename = 'user\\monster\\ems{:03}\\{:02}\\ems{:03}_{:02}_datatune.user.2'\
+                .format(self.id, self.sub_id, self.id, self.sub_id)
+        self.data_tune = user.read_user_file(filename)
 
     def get_meat_data(self):
         if self.is_large_monster:
-            data = BitStream(filename = 'user\\monster\\em{:03}\\{:02}\\em{:03}_{:02}_meat_data.user.2'\
-                .format(self.id, self.sub_id, self.id, self.sub_id))
+            filename = 'user\\monster\\em{:03}\\{:02}\\em{:03}_{:02}_meat_data.user.2'\
+                .format(self.id, self.sub_id, self.id, self.sub_id)
         else:
-            data = BitStream(filename = 'user\\monster\\ems{:03}\\{:02}\\ems{:03}_{:02}_meat_data.user.2'\
-                .format(self.id, self.sub_id, self.id, self.sub_id))
-        data = user.read_usr_head(data)
-        data_type_list, data = user.read_rsz_head(data)
-        self.meat_data, _ = user.read_rsz(data_type_list, data)
+            filename = 'user\\monster\\ems{:03}\\{:02}\\ems{:03}_{:02}_meat_data.user.2'\
+                .format(self.id, self.sub_id, self.id, self.sub_id)
+        self.meat_data = user.read_user_file(filename)
 
     def get_condition_damage_data(self):
         if self.is_large_monster:
-            data = BitStream(filename = 'user\\monster\\em{:03}\\{:02}\\em{:03}_{:02}_condition_damage_data.user.2'\
-                .format(self.id, self.sub_id, self.id, self.sub_id))
+            filename = 'user\\monster\\em{:03}\\{:02}\\em{:03}_{:02}_condition_damage_data.user.2'\
+                .format(self.id, self.sub_id, self.id, self.sub_id)
         else:
-            data = BitStream(filename = 'user\\monster\\ems{:03}\\{:02}\\ems{:03}_{:02}_condition_damage_data.user.2'\
-                .format(self.id, self.sub_id, self.id, self.sub_id))
-        data = user.read_usr_head(data)
-        data_type_list, data = user.read_rsz_head(data)
-        self.condition_damage_data, _ = user.read_rsz(data_type_list, data)
+            filename = 'user\\monster\\ems{:03}\\{:02}\\ems{:03}_{:02}_condition_damage_data.user.2'\
+                .format(self.id, self.sub_id, self.id, self.sub_id)
+        self.condition_damage_data = user.read_user_file(filename)
 
     def get_anger_data(self):
         if self.is_large_monster:
-            data = BitStream(filename = 'user\\monster\\em{:03}\\{:02}\\em{:03}_{:02}_anger_data.user.2'\
-                .format(self.id, self.sub_id, self.id, self.sub_id))
+            filename = 'user\\monster\\em{:03}\\{:02}\\em{:03}_{:02}_anger_data.user.2'\
+                .format(self.id, self.sub_id, self.id, self.sub_id)
         else:
-            data = BitStream(filename = 'user\\monster\\ems{:03}\\{:02}\\ems{:03}_{:02}_anger_data.user.2'\
-                .format(self.id, self.sub_id, self.id, self.sub_id))
-        data = user.read_usr_head(data)
-        data_type_list, data = user.read_rsz_head(data)
-        self.anger_data, _ = user.read_rsz(data_type_list, data)
+            filename = 'user\\monster\\ems{:03}\\{:02}\\ems{:03}_{:02}_anger_data.user.2'\
+                .format(self.id, self.sub_id, self.id, self.sub_id)
+        self.anger_data = user.read_user_file(filename)
 
     def get_parts_break_data(self):
         if self.is_large_monster:
-            data = BitStream(filename = 'user\\monster\\em{:03}\\{:02}\\em{:03}_{:02}_parts_break_data.user.2'\
-                .format(self.id, self.sub_id, self.id, self.sub_id))
+            filename = 'user\\monster\\em{:03}\\{:02}\\em{:03}_{:02}_parts_break_data.user.2'\
+                .format(self.id, self.sub_id, self.id, self.sub_id)
         else:
-            data = BitStream(filename = 'user\\monster\\ems{:03}\\{:02}\\ems{:03}_{:02}_parts_break_data.user.2'\
-                .format(self.id, self.sub_id, self.id, self.sub_id))
-        data = user.read_usr_head(data)
-        data_type_list, data = user.read_rsz_head(data)
-        self.parts_break_data, _ = user.read_rsz(data_type_list, data)
+            filename = 'user\\monster\\ems{:03}\\{:02}\\ems{:03}_{:02}_parts_break_data.user.2'\
+                .format(self.id, self.sub_id, self.id, self.sub_id)
+        self.parts_break_data = user.read_user_file(filename)
 
     def get_boss_init_set_data(self):
         if self.is_large_monster:
-            data = BitStream(filename = 'user\\monster\\em{:03}\\{:02}\\em{:03}_{:02}_boss_init_set_data.user.2'\
-                .format(self.id, self.sub_id, self.id, self.sub_id))
+            filename = 'user\\monster\\em{:03}\\{:02}\\em{:03}_{:02}_boss_init_set_data.user.2'\
+                .format(self.id, self.sub_id, self.id, self.sub_id)
         else:
             self.boss_init_set_data = None
             return
-        data = user.read_usr_head(data)
-        data_type_list, data = user.read_rsz_head(data)
-        self.boss_init_set_data, _ = user.read_rsz(data_type_list, data)
+        self.boss_init_set_data = user.read_user_file(filename)
 
     def get_drop_item(self):
         if self.is_large_monster:
-            data = BitStream(filename = 'user\\monster\\em{:03}\\{:02}\\em{:03}_{:02}_drop_item_info_data.user.2'\
-                .format(self.id, self.sub_id, self.id, self.sub_id))
+            filename = 'user\\monster\\em{:03}\\{:02}\\em{:03}_{:02}_drop_item_info_data.user.2'\
+                .format(self.id, self.sub_id, self.id, self.sub_id)
         else:
-            data = BitStream(filename = 'user\\monster\\ems{:03}\\{:02}\\ems{:03}_{:02}_drop_item_info_data.user.2'\
-                .format(self.id, self.sub_id, self.id, self.sub_id))
-        data = user.read_usr_head(data)
-        data_type_list, data = user.read_rsz_head(data)
-        self.drop_item, _ = user.read_rsz(data_type_list, data)
+            filename = 'user\\monster\\ems{:03}\\{:02}\\ems{:03}_{:02}_drop_item_info_data.user.2'\
+                .format(self.id, self.sub_id, self.id, self.sub_id)
+        self.drop_item = user.read_user_file(filename)
 
 def read_large_monster_data():
     large_monsters = []
