@@ -1,7 +1,7 @@
 # How to dump Switch game files
-## Preparing SD card
-Atmosphere is like the operation system of CFW mode, and Hekate is how you boot Switch into Atmosphere.
+Atmosphere is a Switch CFW (custom firmware) where you can dump game files, and Hekate is how you boot Switch into Atmosphere. To launch Hekate, you need to boot your Switch into RCM (recovery mode) first. This requires a prepared SD card, USB connection between Switch and PC, and a way to ground Switch pin #10 on the right joy-con slot.
 
+## Preparing SD card
 Please check [this useful reference](https://nh-server.github.io/switch-guide/extras/updating/).
 
 ### Atmosphere
@@ -27,7 +27,7 @@ When a new version of Hekate releases, you can update by following these steps:
 Make sure `prod.keys` and `title.keys` are under an SD card directory `switch`. If you don't have the keys, you can dump them first by launching `Lockpick_RCM.bin` from Hekate, which can be downloaded [here](https://github.com/shchmue/Lockpick_RCM/releases). Put it under `sd:/bootloader/payloads` and it is launchable in Hekate just like Atmosphere (see below).
 
 ## Booting into RCM and launching Hekate
-* With Switch turned off, ground the correct pins on the right controller slot. Connect Switch to PC through USB, open `TegraRcmGUI.exe` on PC. The Switch icon should be red saying "NO RCM".
+* With Switch turned off, ground pin #10 on the right joy-con slot. Connect Switch to PC through USB, open `TegraRcmGUI.exe` on PC. The Switch icon should be red saying "NO RCM".
 * Press volume up button and power button on Switch to boot into RCM (recovery mode). The Switch should show black screen, but `TegraRcmGUI` should turn green saying "RCM OK".
 * Inject the Hekate payload. This launches Hekate on Switch.
 
@@ -41,7 +41,7 @@ Please check [this useful reference](https://zeldamods.org/wiki/Help:Dumping_gam
 
 Dump the game files directly to your SD card using nxdumptool. Update data can only be processed if the base game is available, because they share the same filesystem. DLCs don't, so they have to be dumped separately.
 
-** Turn on airplane mode before dumping!**
+**Turn on airplane mode before dumping!**
 
 ### Dumping game files
 On your Switch, open `nxdumptool`. Afterwards:
