@@ -6,7 +6,7 @@ mhrice is an awesome project and very instructive in understanding the data stru
 ## Preparation
 This project starts with unpacked game data, so rather than working on the .pak file (which mhrice does), I already have a file structure of nested folders. To get this file structure, please follow these steps:
 
-* Download raw data files from a hacked Switch. These Youtube videos can be helpful: [recovery mode](https://www.youtube.com/watch?v=3-UeB_enPrM), [get product keys](https://www.youtube.com/watch?v=2LyNjylC7yY), and [get .xci file](https://www.youtube.com/watch?v=PGjEyI_YFuo&t=440s) 
+* Download raw data files from a hacked Switch. These links can be helpful: [recovery mode](https://www.youtube.com/watch?v=3-UeB_enPrM), [dump files](https://yuzu-emu.org/help/quickstart/#dumping-cartridge-games), and [my dumping notes](HOW_TO_DUMP.md).
 * There could be multiple raw files, with extensions like .xc0 or .xc1. Merge them into one .xci file. Merging is as easy as running the `copy /b "File1.xc0" + "File2.xc1" "FileOutput.xci"` command.
 * Use [hactool](https://github.com/SciresM/hactool) to unpack the .xci file and obtain a .pak file (default name is re_chunk_000.pak).
 * Use [REtool](https://residentevilmodding.boards.net/thread/10567/pak-tex-editing-tool) to unpack the .pak file and obtain the desired nested folders of game data. You will need a file list, which can be found [here](https://raw.githubusercontent.com/mhvuze/MonsterHunterRiseModding/main/files/mhrise.list). Save the following code as a batch (.bat) file and drag your .pak file over it to unpack.
@@ -16,6 +16,8 @@ This project starts with unpacked game data, so rather than working on the .pak 
 @popd
 @pause
 ```
+
+For unpacking, please also refer to [this link](https://github.com/mhvuze/MonsterHunterRiseModding/wiki/Extracting-Game-Files).
 
 ## Data structure
 By 11/03/2021, I have only implemented reading some .user files (their actual extension is .user.2) that contain the magic "RSZ". These are number-based data, such as weapon, armor and monster stats.
