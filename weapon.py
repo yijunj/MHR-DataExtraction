@@ -1,3 +1,4 @@
+import utils
 from bitstring import BitStream
 from utils import OrderedAttibuteClass
 from enums import *
@@ -16,7 +17,7 @@ class WeaponBaseData(OrderedAttibuteClass):
         self.buy_val = 'u32'
     def human_readable(self):
         self.id = enum_WeaponId(self.id)
-        self.rare_type += 1 # Now starts from 1
+        self.rare_type = newtype_RareTypes(self.rare_type) # Now starts from 1
 
 class MainWeaponBaseData(WeaponBaseData):
     def __init__(self):
@@ -28,9 +29,9 @@ class MainWeaponBaseData(WeaponBaseData):
         self.slot_num_list = ['u32']
     def human_readable(self):
         super().human_readable()
-        if self.atk > 0x7FFFFFFF: self.atk -= (0xFFFFFFFF + 1)
-        if self.critical_rate > 0x7FFFFFFF: self.critical_rate -= (0xFFFFFFFF + 1)
-        if self.def_bonus > 0x7FFFFFFF: self.def_bonus -= (0xFFFFFFFF + 1)
+        self.atk = utils.u32_to_i32(self.atk)
+        self.critical_rate = utils.u32_to_i32(self.critical_rate)
+        self.def_bonus = utils.u32_to_i32(self.def_bonus)
         self.hyakuryu_skill_id_list = [enum_PlHyakuryuSkillId(i) for i in self.hyakuryu_skill_id_list] # Now starts from 0
 
 class ElementWeaponBaseData(MainWeaponBaseData):
@@ -41,7 +42,7 @@ class ElementWeaponBaseData(MainWeaponBaseData):
     def human_readable(self):
         super().human_readable()
         self.main_element_type = enum_PlWeaponElementTypes(self.main_element_type)
-        if self.main_element_val > 0x7FFFFFFF: self.main_element_val -= (0xFFFFFFFF + 1)
+        self.main_element_val = utils.u32_to_i32(self.main_element_val)
 
 class CloseRangeWeaponBaseData(ElementWeaponBaseData):
     def __init__(self):
@@ -50,8 +51,8 @@ class CloseRangeWeaponBaseData(ElementWeaponBaseData):
         self.takumi_val_list = ['u32']
     def human_readable(self):
         super().human_readable()
-        self.sharpness_val_list = [i-(0xFFFFFFFF + 1) if i > 0x7FFFFFFF else i for i in self.sharpness_val_list]
-        self.takumi_val_list = [i-(0xFFFFFFFF + 1) if i > 0x7FFFFFFF else i for i in self.takumi_val_list]
+        self.sharpness_val_list = [utils.u32_to_i32(i) for i in self.sharpness_val_list]
+        self.takumi_val_list = [utils.u32_to_i32(i) for i in self.takumi_val_list]
 
 class GreatSwordBaseUserDataParam(CloseRangeWeaponBaseData):
     def __init__(self):
@@ -111,7 +112,7 @@ class SlashAxeBaseUserDataParam(CloseRangeWeaponBaseData):
     def human_readable(self):
         super().human_readable()
         self.slash_axe_bottle_type = enum_SlashAxeBottleTypes(self.slash_axe_bottle_type)
-        if self.slash_axe_bottle_element_val > 0x7FFFFFFF: self.slash_axe_bottle_element_val -= (0xFFFFFFFF + 1)
+        self.slash_axe_bottle_element_val = utils.u32_to_i32(self.slash_axe_bottle_element_val)
 
 class SlashAxeBaseUserData(OrderedAttibuteClass):
     def __init__(self):
@@ -125,8 +126,7 @@ class GunLanceBaseUserDataParam(CloseRangeWeaponBaseData):
     def human_readable(self):
         super().human_readable()
         self.gun_lance_fire_type = enum_GunLanceFireType(self.gun_lance_fire_type)
-        if self.gun_lance_fire_lv > 0x7FFFFFFF: self.gun_lance_fire_lv -= (0xFFFFFFFF + 1)
-        self.gun_lance_fire_lv += 1
+        self.gun_lance_fire_lv = newtype_GunLanceFireLv(self.gun_lance_fire_lv)
 
 class GunLanceBaseUserData(OrderedAttibuteClass):
     def __init__(self):
@@ -140,7 +140,7 @@ class DualBladesBaseUserDataParam(CloseRangeWeaponBaseData):
     def human_readable(self):
         super().human_readable()
         self.sub_element_type = enum_PlWeaponElementTypes(self.sub_element_type)
-        if self.sub_element_val > 0x7FFFFFFF: self.sub_element_val -= (0xFFFFFFFF + 1)
+        self.sub_element_val = utils.u32_to_i32(self.sub_element_val)
 
 class DualBladesBaseUserData(OrderedAttibuteClass):
     def __init__(self):
@@ -152,7 +152,7 @@ class HornBaseUserDataParam(CloseRangeWeaponBaseData):
         self.horn_melody_type_list = ['u32']
     def human_readable(self):
         super().human_readable()
-        self.horn_melody_type_list = [i-(0xFFFFFFFF + 1) if i > 0x7FFFFFFF else i for i in self.horn_melody_type_list]
+        self.horn_melody_type_list = [utils.u32_to_i32(i) for i in self.horn_melody_type_list]
 
 class HornBaseUserData(OrderedAttibuteClass):
     def __init__(self):
@@ -164,8 +164,7 @@ class InsectGlaiveBaseUserDataParam(CloseRangeWeaponBaseData):
         self.insect_glaive_insect_lv = 'u32'
     def human_readable(self):
         super().human_readable()
-        if self.insect_glaive_insect_lv > 0x7FFFFFFF: self.insect_glaive_insect_lv -= (0xFFFFFFFF + 1)
-        self.insect_glaive_insect_lv += 1
+        self.insect_glaive_insect_lv = newtype_InsectLevelTypes(self.insect_glaive_insect_lv)
 
 class InsectGlaiveBaseUserData(OrderedAttibuteClass):
     def __init__(self):
@@ -196,8 +195,8 @@ class BulletWeaponBaseUserDataParam(MainWeaponBaseData):
     def human_readable(self):
         super().human_readable()
         self.fluctuation = enum_Fluctuation(self.fluctuation)
-        if self.reload > 0x7FFFFFFF: self.reload -= (0xFFFFFFFF + 1)
-        if self.recoil > 0x7FFFFFFF: self.recoil -= (0xFFFFFFFF + 1)
+        self.reload = utils.u32_to_i32(self.reload)
+        self.recoil = utils.u32_to_i32(self.recoil)
         self.kakusan_type = enum_KakusanType(self.kakusan_type)
         self.bullet_equip_flag_list = [bool(i) for i in self.bullet_equip_flag_list]
         self.bullet_type_list = [enum_ShootType(i) for i in self.bullet_type_list]
@@ -240,10 +239,9 @@ class BowBaseUserDataParam(ElementWeaponBaseData):
         super().human_readable()
         self.bow_bottle_power_up_type_list = [enum_BottlePowerUpTypes(i) for i in self.bow_bottle_power_up_type_list]
         self.bow_bottle_equip_flag_list = [bool(i) for i in self.bow_bottle_equip_flag_list]
-        if self.bow_default_charge_lv_limit > 0x7FFFFFFF: self.bow_default_charge_lv_limit -= (0xFFFFFFFF + 1)
-        self.bow_default_charge_lv_limit += 1
+        self.bow_default_charge_lv_limit = newtype_BowChargeStartLvTypes(self.bow_default_charge_lv_limit)
         self.bow_charge_type_list = [enum_BowChargeTypes(i) for i in self.bow_charge_type_list]
-        if self.bow_curve_type > 0x7FFFFFFF: self.bow_curve_type -= (0xFFFFFFFF + 1)
+        self.bow_curve_type = utils.u32_to_i32(self.bow_curve_type)
 
 class BowBaseUserData(OrderedAttibuteClass):
     def __init__(self):
@@ -263,9 +261,9 @@ class WeaponCraftingData(OrderedAttibuteClass):
         self.id = enum_WeaponId(self.id)
         self.item_flag = enum_ItemId(self.item_flag)
         self.enemy_flag = enum_EmTypes(self.enemy_flag)
-        if self.progress_flag > 0x7FFFFFFF: self.progress_flag -= (0xFFFFFFFF + 1)
+        self.progress_flag = utils.u32_to_i32(self.progress_flag)
         self.item = [enum_ItemId(i) for i in self.item]
-        self.material_category = enum_MaterialCategory(self.material_category)
+        self.material_category = newtype_MaterialCategory(self.material_category)
 
 class WeaponProcessUserDataParam(WeaponCraftingData):
     def __init__(self):
@@ -316,14 +314,14 @@ class WeaponUpdateTreeUserDataParam(OrderedAttibuteClass):
         self.prev_weapon_index = 'u32'
     def human_readable(self):
         self.tree_type = enum_TreeType(self.tree_type)
-        if self.index > 0x7FFFFFFF: self.index -= (0xFFFFFFFF + 1)
+        self.index = utils.u32_to_i32(self.index)
         self.village_progress = enum_VillageProgress(self.village_progress)
         self.hall_progress = enum_HallProgress(self.hall_progress)
         self.weapon_id = enum_WeaponId(self.weapon_id)
         self.next_weapon_type_list = [enum_TreeType(i) for i in self.next_weapon_type_list]
-        self.next_weapon_index_list = [i-(0xFFFFFFFF + 1) if i > 0x7FFFFFFF else i for i in self.next_weapon_index_list]
+        self.next_weapon_index_list = [utils.u32_to_i32(i) for i in self.next_weapon_index_list]
         self.prev_weapon_type = enum_TreeType(self.prev_weapon_type)
-        if self.prev_weapon_index > 0x7FFFFFFF: self.prev_weapon_index -= (0xFFFFFFFF + 1)
+        self.prev_weapon_index = utils.u32_to_i32(self.prev_weapon_index)
 
 class WeaponUpdateTreeUserData(OrderedAttibuteClass):
     def __init__(self):

@@ -1,3 +1,4 @@
+import utils
 from utils import OrderedAttibuteClass
 from enums import *
 
@@ -32,20 +33,21 @@ class ArmorBaseUserDataParam(OrderedAttibuteClass):
     def human_readable(self):
         self.pl_armor_id = enum_PlArmorId(self.pl_armor_id)
         self.is_valid = bool(self.is_valid)
-        self.rare += 1
+        self.series = newtype_PlArmorSeriesTypes(self.series)
+        self.rare = newtype_RareTypes(self.rare)
         self.sexual_equipable = enum_SexualEquipableFlag(self.sexual_equipable)
         self.symbol_color1 = bool(self.symbol_color1)
         self.symbol_color2 = bool(self.symbol_color2)
-        if self.def_val > 0x7FFFFFFF: self.def_val -= (0xFFFFFFFF + 1)
-        if self.fire_reg_val > 0x7FFFFFFF: self.fire_reg_val -= (0xFFFFFFFF + 1)
-        if self.water_reg_val > 0x7FFFFFFF: self.water_reg_val -= (0xFFFFFFFF + 1)
-        if self.ice_reg_val > 0x7FFFFFFF: self.ice_reg_val -= (0xFFFFFFFF + 1)
-        if self.thunder_reg_val > 0x7FFFFFFF: self.thunder_reg_val -= (0xFFFFFFFF + 1)
-        if self.dragon_reg_val > 0x7FFFFFFF: self.dragon_reg_val -= (0xFFFFFFFF + 1)
-        if self.buildup_table > 0x7FFFFFFF: self.buildup_table -= (0xFFFFFFFF + 1)
-        if self.buff_formula > 0x7FFFFFFF: self.buff_formula -= (0xFFFFFFFF + 1)
+        self.def_val = utils.u32_to_i32(self.def_val)
+        self.fire_reg_val = utils.u32_to_i32(self.fire_reg_val)
+        self.water_reg_val = utils.u32_to_i32(self.water_reg_val)
+        self.ice_reg_val = utils.u32_to_i32(self.ice_reg_val)
+        self.thunder_reg_val = utils.u32_to_i32(self.thunder_reg_val)
+        self.dragon_reg_val = utils.u32_to_i32(self.dragon_reg_val)
+        self.buildup_table = utils.u32_to_i32(self.buildup_table)
+        self.buff_formula = utils.u32_to_i32(self.buff_formula)
         self.skill_list = [enum_PlEquipSkillId(i) for i in self.skill_list]
-        self.skill_lv_list = [i-(0xFFFFFFFF + 1) if i > 0x7FFFFFFF else i for i in self.skill_lv_list]
+        self.skill_lv_list = [utils.u32_to_i32(i) for i in self.skill_lv_list]
         self.id_after_ex_change = enum_PlArmorId(self.id_after_ex_change)
 
 class ArmorBaseUserData(OrderedAttibuteClass):
@@ -61,6 +63,7 @@ class ArmorSeriesUserDataParam(OrderedAttibuteClass):
         self.overwear_sort_index = 'u32'
         self.sexual_enable = 'u32'
     def human_readable(self):
+        self.armor_series = newtype_PlArmorSeriesTypes(self.armor_series)
         self.difficulty_group = enum_EquipDifficultyGroup(self.difficulty_group)
         self.is_collabo = bool(self.is_collabo)
         self.sexual_enable = enum_SexualEquipableFlag(self.sexual_enable)
@@ -85,9 +88,9 @@ class ArmorProductUserDataParam(OrderedAttibuteClass):
         self.id = enum_PlArmorId(self.id)
         self.item_flag = enum_ItemId(self.item_flag)
         self.enemy_flag = enum_EmTypes(self.enemy_flag)
-        if self.progress_flag > 0x7FFFFFFF: self.progress_flag -= (0xFFFFFFFF + 1)
+        self.progress_flag = utils.u32_to_i32(self.progress_flag)
         self.item = [enum_ItemId(i) for i in self.item]
-        self.material_category = enum_MaterialCategory(self.material_category)
+        self.material_category = newtype_MaterialCategory(self.material_category)
         self.output_item = [enum_ItemId(i) for i in self.output_item]
 
 class ArmorProductUserData(OrderedAttibuteClass):
@@ -111,7 +114,8 @@ class PlOverwearBaseUserDataParam(OrderedAttibuteClass):
         self.id = enum_PlOverwearId(self.id)
         self.is_valid = bool(self.is_valid)
         self.relative_id = enum_PlArmorId(self.relative_id)
-        self.rare_type += 1
+        self.series = newtype_PlArmorSeriesTypes(self.series)
+        self.rare_type = newtype_RareTypes(self.rare_type)
         self.sexual_equipable = enum_SexualEquipableFlag(self.sexual_equipable)
         self.symbol_color_flag_list = [bool(i) for i in self.symbol_color_flag_list]
         self.is_one_set = bool(self.is_one_set)
@@ -136,10 +140,10 @@ class PlOverwearProductUserDataParam(OrderedAttibuteClass):
         self.id = enum_PlOverwearId(self.id)
         self.item_flag = enum_ItemId(self.item_flag)
         self.enemy_flag = enum_EmTypes(self.enemy_flag)
-        if self.progress_flag > 0x7FFFFFFF: self.progress_flag -= (0xFFFFFFFF + 1)
+        self.progress_flag = utils.u32_to_i32(self.progress_flag)
         self.hr_limit_flag = bool(self.hr_limit_flag)
         self.item = [enum_ItemId(i) for i in self.item]
-        self.material_category = enum_MaterialCategory(self.material_category)
+        self.material_category = newtype_MaterialCategory(self.material_category)
         self.is_one_set = bool(self.is_one_set)
 
 class PlOverwearProductUserData(OrderedAttibuteClass):

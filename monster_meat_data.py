@@ -1,6 +1,5 @@
 from utils import OrderedAttibuteClass
 from enums import *
-import utils
 
 # This correspondes to part of MHRice meat_data.rs
 # Classes for monster meat data, which will become part of Monster class

@@ -1,16 +1,13 @@
 from bitstring import BitStream
 import json
 from utils import RSZ_TYPE_MAP
-from alchemy import *
-from item import *
-from armor import *
-from weapon import *
-from skill import *
-from quest import *
-from condition_damage_preset import *
-from boss import *
-from lot import *
 
+from alchemy import *
+from armor import *
+from boss import *
+from condition_damage_preset import *
+from item import *
+from lot import *
 from monster_data_base import *
 from monster_data_tune import *
 from monster_meat_data import *
@@ -19,6 +16,12 @@ from monster_anger_data import *
 from monster_parts_break_data import *
 from monster_boss_init_set_data import *
 from monster_drop_item import *
+from quest import *
+from skill import *
+from weapon import *
+
+# This script is about reading user data files
+# Basically, it reads a certain number of bits, assigns it to the current class attribute, then repeat
 
 def print_hex(data):
     print('{:0>4X}'.format(data))
@@ -44,6 +47,7 @@ def print_last_few_params(object, n, deliminator='\n'):
     else:
         raise Exception('Object has more than one attributes') # Should use print_hierarchical_object instead
 
+# This prints a nested object (object has one ore more attributes that is/are other object(s)), unpacked
 def print_hierarchical_object(object, deliminator='\n'):
     for key in object.keys():
         attribute = getattr(object, key)
@@ -65,6 +69,7 @@ def print_hierarchical_object(object, deliminator='\n'):
                 print_hierarchical_object(attribute, deliminator)
     print('},', end=deliminator)
 
+# Reads meta data of a user data file
 def read_usr_head(data):
     magic = data.read('uintle:32')
     if magic != 0x00525355: # little-endian version of USR\0
@@ -83,6 +88,7 @@ def read_usr_head(data):
     data.pos = rsz_offset * 8
     return data
 
+# Reads meta data of a RSZ data file
 def read_rsz_head(data):
     base = data.pos
     magic = data.read('uintle:32')
@@ -121,6 +127,9 @@ def read_rsz_head(data):
     data.pos = base + data_offset * 8
     return data_type_list, data
 
+# Reads a chunk in the RSZ file corresponding to the given object
+# The data part of RSZ is sequential according to a data type hash in the beginning of the file
+# Here I send in a certain data type, create an object, an read the file to fill in its attributes
 def read_rsz_chunk(data_type, data):
     object = eval(data_type)()
     object.add_padding()
@@ -165,7 +174,7 @@ def read_rsz_chunk(data_type, data):
                     while data.pos % 32 != 0: # If not read in a full block of 4 bytes, move the cursor to the next block
                         data.pos += 1
             else:
-                # This attribute eats
+                # This attribute 'eats' (absorbes other objects as its value)
                 # Need to move the cursor to the correct position
                 # Because after the parent node takes its children, the game file performs a count
                 # Jump over the data number counts and move the cursor to the next data chunk
@@ -207,6 +216,18 @@ def read_rsz_chunk(data_type, data):
     # print_object(object)
     return object, data
 
+# Analyze the data type list, figure out the hierarchy between data types
+# Some data types contain other data types
+# i.e. object x of a certain data type X has object y of a certain data type Y as its attribute
+# This shows in the data type list as [...Y,X...]
+# So I need to see if a data type can absorb other data types in front of it in the list
+# I call this 'eating' (object x eats object y)
+# Sometimes x can eat multiple y's in front of it
+# Here I create a stack and push the objects in if they don't have anything to eat
+# However, if a data type x does eat, according to the structure it should eat the top of stack y
+# So the code pops the top y, absorbs it into x, then repeat until the top is no longer edible by x
+# Then x is pushed into the stack
+# In the end the stack should only have a root left
 def read_rsz(data_type_list, data):
     data_stack = []
     for data_type in data_type_list:
@@ -242,7 +263,7 @@ def read_rsz(data_type_list, data):
                 attribute.reverse()
                 attribute.pop() # Get rid of the initialization string
 
-        # Data that don't eat
+        # Data that don't eat: use read_rsz_chunk() to fill in values
         temp_object, data = read_rsz_chunk(data_type, data)
         for key in keys:
             attribute = getattr(object, key)
@@ -255,6 +276,7 @@ def read_rsz(data_type_list, data):
         raise Exception('Stack should only have the root left in the end')
     return data_stack[0], data
 
+# Combines everything together
 def read_user_file(filename):
     data = BitStream(filename = filename)
     data = read_usr_head(data)

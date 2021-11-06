@@ -1,6 +1,6 @@
+import utils
 from utils import OrderedAttibuteClass
 from enums import *
-import utils
 
 # This correspondes to MHRice quest_data.rs
 # Classes for quest data
@@ -49,11 +49,11 @@ class NormalQuestDataParam(OrderedAttibuteClass):
         self.battle_bgm_type = 'u32'
         self.clear_bgm_type = 'u32'
     def human_readable(self):
-        if self.quest_no > 0x7FFFFFFF: self.quest_no -= (0xFFFFFFFF + 1)
-        self.quest_type = enum_QuestType(self.quest_type)
+        self.quest_no = utils.u32_to_i32(self.quest_no)
+        self.quest_type = bitflags_QuestType(self.quest_type)
         self.quest_level = enum_QuestLevel(self.quest_level)
         self.enemy_level = enum_EnemyLevel(self.enemy_level)
-        if self.map_no > 0x7FFFFFFF: self.map_no -= (0xFFFFFFFF + 1)
+        self.map_no = utils.u32_to_i32(self.map_no)
         self.order_type = [enum_QuestOrderType(i) for i in self.order_type]
         self.target_type = [enum_QuestTargetType(i) for i in self.target_type]
         self.tgt_em_type = [enum_EmTypes(i) for i in self.tgt_em_type]
@@ -63,7 +63,7 @@ class NormalQuestDataParam(OrderedAttibuteClass):
         self.is_swap_exit_marionette = bool(self.is_swap_exit_marionette)
         self.swap_stop_type = enum_SwapStopType(self.swap_stop_type)
         self.swap_exec_type = enum_SwapExecType(self.swap_exec_type)
-        self.icon = [i-(0xFFFFFFFF + 1) if i > 0x7FFFFFFF else i for i in self.icon]
+        self.icon = [utils.u32_to_i32(i) for i in self.icon]
         self.is_from_npc = bool(self.is_from_npc)
         self.is_tutorial = bool(self.is_tutorial)
         self.fence_default_active = bool(self.fence_default_active)
@@ -90,7 +90,7 @@ class SharedEnemyParam(OrderedAttibuteClass):
         self.difficulty = ['u32']
         self.boss_multi = ['u8']
     def human_readable(self):
-        self.scale_tbl = [i-(0xFFFFFFFF + 1) if i > 0x7FFFFFFF else i for i in self.scale_tbl]
+        self.scale_tbl = [utils.u32_to_i32(i) for i in self.scale_tbl]
         self.difficulty = [enum_NandoYuragi(i) for i in self.difficulty]
 
 class NormalQuestDataForEnemyParam(SharedEnemyParam):
@@ -108,8 +108,8 @@ class NormalQuestDataForEnemyParam(SharedEnemyParam):
             self.__odict__.move_to_end(key)
     def human_readable(self):
         super().human_readable()
-        if self.quest_no > 0x7FFFFFFF: self.quest_no -= (0xFFFFFFFF + 1)
-        if self.ems_set_no > 0x7FFFFFFF: self.ems_set_no -= (0xFFFFFFFF + 1)
+        self.quest_no = utils.u32_to_i32(self.quest_no)
+        self.ems_set_no = utils.u32_to_i32(self.ems_set_no)
 
 class NormalQuestDataForEnemy(OrderedAttibuteClass):
     def __init__(self):
@@ -119,19 +119,19 @@ class VitalRateTableData(OrderedAttibuteClass):
     def __init__(self):
         self.vital_rate = 'u32'
     def human_readable(self):
-        self.vital_rate = utils.hex_to_f32(hex(self.vital_rate)[2:])
+        self.vital_rate = utils.u32_to_f32(self.vital_rate)
 
 class AttackRateTableData(OrderedAttibuteClass):
     def __init__(self):
         self.attack_rate = 'u32'
     def human_readable(self):
-        self.attack_rate = utils.hex_to_f32(hex(self.attack_rate)[2:])
+        self.attack_rate = utils.u32_to_f32(self.attack_rate)
 
 class PartsRateTableData(OrderedAttibuteClass):
     def __init__(self):
         self.parts_vital_rate = 'u32'
     def human_readable(self):
-        self.parts_vital_rate = utils.hex_to_f32(hex(self.parts_vital_rate)[2:])
+        self.parts_vital_rate = utils.u32_to_f32(self.parts_vital_rate)
 
 class OtherRateTableData(OrderedAttibuteClass):
     def __init__(self):
@@ -142,12 +142,12 @@ class OtherRateTableData(OrderedAttibuteClass):
         self.tired_rate = 'u32'
         self.marionette_rate = 'u32'
     def human_readable(self):
-        self.defense_rate = utils.hex_to_f32(hex(self.defense_rate)[2:])
-        self.damage_element_rate_a = utils.hex_to_f32(hex(self.damage_element_rate_a)[2:])
-        self.damage_element_rate_b = utils.hex_to_f32(hex(self.damage_element_rate_b)[2:])
-        self.stun_rate = utils.hex_to_f32(hex(self.stun_rate)[2:])
-        self.tired_rate = utils.hex_to_f32(hex(self.tired_rate)[2:])
-        self.marionette_rate = utils.hex_to_f32(hex(self.marionette_rate)[2:])
+        self.defense_rate = utils.u32_to_f32(self.defense_rate)
+        self.damage_element_rate_a = utils.u32_to_f32(self.damage_element_rate_a)
+        self.damage_element_rate_b = utils.u32_to_f32(self.damage_element_rate_b)
+        self.stun_rate = utils.u32_to_f32(self.stun_rate)
+        self.tired_rate = utils.u32_to_f32(self.tired_rate)
+        self.marionette_rate = utils.u32_to_f32(self.marionette_rate)
 
 class MultiData(OrderedAttibuteClass):
     def __init__(self):
@@ -155,9 +155,9 @@ class MultiData(OrderedAttibuteClass):
         self.three = 'u32'
         self.four = 'u32'
     def human_readable(self):
-        self.two = utils.hex_to_f32(hex(self.two)[2:])
-        self.three = utils.hex_to_f32(hex(self.three)[2:])
-        self.four = utils.hex_to_f32(hex(self.four)[2:])
+        self.two = utils.u32_to_f32(self.two)
+        self.three = utils.u32_to_f32(self.three)
+        self.four = utils.u32_to_f32(self.four)
 
 class MultiRateTableData(OrderedAttibuteClass):
     def __init__(self):
@@ -176,14 +176,14 @@ class ScaleAndRateData(OrderedAttibuteClass):
         self.scale = 'u32'
         self.rate = 'u32'
     def human_readable(self):
-        self.scale = utils.hex_to_f32(hex(self.scale)[2:])
+        self.scale = utils.u32_to_f32(self.scale)
 
 class RandomScaleTableData(OrderedAttibuteClass):
     def __init__(self):
         self.type = 'u32'
         self.scale_and_rate_data = ['ScaleAndRateData']
     def human_readable(self):
-        if self.type > 0x7FFFFFFF: self.type -= (0xFFFFFFFF + 1)
+        self.type = utils.u32_to_i32(self.type)
 
 class EnemyBossRandomScaleData(OrderedAttibuteClass):
     def __init__(self):
@@ -199,10 +199,10 @@ class SizeInfo(OrderedAttibuteClass):
         self.no_size_scale = 'u8'
     def human_readable(self):
         self.em_type = enum_EmTypes(self.em_type)
-        self.base_size = utils.hex_to_f32(hex(self.base_size)[2:])
-        self.small_boarder = utils.hex_to_f32(hex(self.small_boarder)[2:])
-        self.big_boarder = utils.hex_to_f32(hex(self.big_boarder)[2:])
-        self.king_boarder = utils.hex_to_f32(hex(self.king_boarder)[2:])
+        self.base_size = utils.u32_to_f32(self.base_size)
+        self.small_boarder = utils.u32_to_f32(self.small_boarder)
+        self.big_boarder = utils.u32_to_f32(self.big_boarder)
+        self.king_boarder = utils.u32_to_f32(self.king_boarder)
         self.no_size_scale = bool(self.no_size_scale)
 
 class EnemySizeListData(OrderedAttibuteClass):
@@ -222,8 +222,10 @@ class DiscoverEmSetDataParam(SharedEnemyParam):
             self.__odict__.move_to_end(key)
     def human_readable(self):
         super().human_readable()
-        if self.cond_low > 0x7FFFFFFF: self.cond_low -= (0xFFFFFFFF + 1)
-        if self.cond_high > 0x7FFFFFFF: self.cond_high -= (0xFFFFFFFF + 1)
+        self.em_type = enum_EmTypes(self.em_type)
+        self.cond_village = enum_VillageProgress(self.cond_village)
+        self.cond_low = utils.u32_to_i32(self.cond_low)
+        self.cond_high = utils.u32_to_i32(self.cond_high)
         self.map_flag = [bool(i) for i in self.map_flag]
 
 class DiscoverEmSetData(OrderedAttibuteClass):

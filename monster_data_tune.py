@@ -1,6 +1,6 @@
+import utils
 from utils import OrderedAttibuteClass
 from enums import *
-import utils
 
 # This correspondes to MHRice data_tune.rs
 # Classes for monster data, which will become part of Monster class
@@ -10,7 +10,7 @@ class EnemyPartsData(OrderedAttibuteClass):
         self.vital = 'u32'
         self.extractive_type = 'u32'
     def human_readable(self):
-        if self.vital > 0x7FFFFFFF: self.vital -= (0xFFFFFFFF + 1)
+        self.vital = utils.u32_to_i32(self.vital)
         self.extractive_type = enum_ExtractiveType(self.extractive_type)
 
 class DataTunePartsBreakData(OrderedAttibuteClass):
@@ -21,11 +21,11 @@ class DataTunePartsBreakData(OrderedAttibuteClass):
         self.ignore_check_count = 'u32'
         self.reward_data = 'u32'
     def human_readable(self):
-        if self.break_level > 0x7FFFFFFF: self.break_level -= (0xFFFFFFFF + 1)
-        if self.vital > 0x7FFFFFFF: self.vital -= (0xFFFFFFFF + 1)
+        self.break_level = utils.u32_to_i32(self.break_level)
+        self.vital = utils.u32_to_i32(self.vital)
         self.ignore_condition = enum_PartsBreakDataIgnoreCondition(self.ignore_condition)
-        if self.ignore_check_count > 0x7FFFFFFF: self.ignore_check_count -= (0xFFFFFFFF + 1)
-        if self.reward_data > 0x7FFFFFFF: self.reward_data -= (0xFFFFFFFF + 1)
+        self.ignore_check_count = utils.u32_to_i32(self.ignore_check_count)
+        self.reward_data = utils.u32_to_i32(self.reward_data)
 
 class DataTuneEnemyPartsBreakData(OrderedAttibuteClass):
     def __init__(self):
@@ -37,7 +37,7 @@ class DataTunePartsLossData(OrderedAttibuteClass):
         self.vital = 'u32'
         self.permit_damage_attr = 'u32'
     def human_readable(self):
-        if self.vital > 0x7FFFFFFF: self.vital -= (0xFFFFFFFF + 1)
+        self.vital = utils.u32_to_i32(self.vital)
         self.permit_damage_attr = enum_PermitDamageAttrEnum(self.permit_damage_attr)
 
 class DataTuneEnemyPartsLossData(OrderedAttibuteClass):
@@ -55,7 +55,7 @@ class MultiPartsVital(OrderedAttibuteClass):
     def __init__(self):
         self.vital = 'u32'
     def human_readable(self):
-        if self.vital > 0x7FFFFFFF: self.vital -= (0xFFFFFFFF + 1)
+        self.vital = utils.u32_to_i32(self.vital)
 
 class EnemyMultiPartsSystemVitalData(OrderedAttibuteClass):
     def __init__(self):
@@ -76,9 +76,9 @@ class EnemyMultiPartsSystemVitalData(OrderedAttibuteClass):
         self.is_enable_hyakuryu = bool(self.is_enable_hyakuryu)
         self.is_enable_overwrite_down = bool(self.is_enable_overwrite_down)
         self.is_prio_damage_customize = bool(self.is_prio_damage_customize)
-        self.prio_damage_catagory_flag = enum_DamageCategoryFlag(self.prio_damage_catagory_flag)
+        self.prio_damage_catagory_flag = bitflags_DamageCategoryFlag(self.prio_damage_catagory_flag)
         self.is_multi_rate_ex = bool(self.is_multi_rate_ex)
-        self.enable_parts_values = [i-(0xFFFFFFFF + 1) if i > 0x7FFFFFFF else i for i in self.enable_parts_values]
+        self.enable_parts_values = [utils.u32_to_i32(i) for i in self.enable_parts_values]
 
 class EnemyMultiPartsVitalData(OrderedAttibuteClass):
     def __init__(self):
@@ -99,8 +99,9 @@ class EnemyMultiPartsVitalData(OrderedAttibuteClass):
         self.is_enable_hyakuryu = bool(self.is_enable_hyakuryu)
         self.is_enable_overwrite_down = bool(self.is_enable_overwrite_down)
         self.is_prio_damage_customize = bool(self.is_prio_damage_customize)
-        self.prio_damage_catagory_flag = enum_DamageCategoryFlag(self.prio_damage_catagory_flag)
-        self.enable_parts_values = [i-(0xFFFFFFFF + 1) if i > 0x7FFFFFFF else i for i in self.enable_parts_values]
+        self.prio_damage_catagory_flag = bitflags_DamageCategoryFlag(self.prio_damage_catagory_flag)
+        self.is_multi_rate_ex = bool(self.is_multi_rate_ex)
+        self.enable_parts_values = [utils.u32_to_i32(i) for i in self.enable_parts_values]
 
 class EnemyGimmickVitalData(OrderedAttibuteClass):
     def __init__(self):
@@ -109,10 +110,10 @@ class EnemyGimmickVitalData(OrderedAttibuteClass):
         self.vital_l = 'u32'
         self.vital_knock_back = 'u32'
     def human_readable(self):
-        if self.vital_s > 0x7FFFFFFF: self.vital_s -= (0xFFFFFFFF + 1)
-        if self.vital_m > 0x7FFFFFFF: self.vital_m -= (0xFFFFFFFF + 1)
-        if self.vital_l > 0x7FFFFFFF: self.vital_l -= (0xFFFFFFFF + 1)
-        if self.vital_knock_back > 0x7FFFFFFF: self.vital_knock_back -= (0xFFFFFFFF + 1)
+        self.vital_s = utils.u32_to_i32(self.vital_s)
+        self.vital_m = utils.u32_to_i32(self.vital_m)
+        self.vital_l = utils.u32_to_i32(self.vital_l)
+        self.vital_knock_back = utils.u32_to_i32(self.vital_knock_back)
 
 class EnemyMarionetteVitalData(OrderedAttibuteClass):
     def __init__(self):
@@ -120,17 +121,17 @@ class EnemyMarionetteVitalData(OrderedAttibuteClass):
         self.vital_m = 'u32'
         self.vital_l = 'u32'
     def human_readable(self):
-        if self.vital_s > 0x7FFFFFFF: self.vital_s -= (0xFFFFFFFF + 1)
-        if self.vital_m > 0x7FFFFFFF: self.vital_m -= (0xFFFFFFFF + 1)
-        if self.vital_l > 0x7FFFFFFF: self.vital_l -= (0xFFFFFFFF + 1)
+        self.vital_s = utils.u32_to_i32(self.vital_s)
+        self.vital_m = utils.u32_to_i32(self.vital_m)
+        self.vital_l = utils.u32_to_i32(self.vital_l)
 
 class CharacterContollerTune(OrderedAttibuteClass):
     def __init__(self):
         self.radius = 'u32'
         self.offset_y = 'u32'
     def human_readable(self):
-        self.radius = utils.hex_to_f32(hex(self.radius)[2:])
-        self.offset_y = utils.hex_to_f32(hex(self.offset_y)[2:])
+        self.radius = utils.u32_to_f32(self.radius)
+        self.offset_y = utils.u32_to_f32(self.offset_y)
 
 class EnemyDataTune(OrderedAttibuteClass):
     def __init__(self):
@@ -160,20 +161,20 @@ class EnemyDataTune(OrderedAttibuteClass):
         self.max_num_for_hyakuryu_quest = 'u32'
         self.max_sound_damage_count = 'u32'
     def human_readable(self):
-        if self.base_hp_vital > 0x7FFFFFFF: self.base_hp_vital -= (0xFFFFFFFF + 1)
-        self.terrain_action_check_dist = utils.hex_to_f32(hex(self.terrain_action_check_dist)[2:])
-        self.adjust_wall_point_offset = utils.hex_to_f32(hex(self.adjust_wall_point_offset)[2:])
+        self.base_hp_vital = utils.u32_to_i32(self.base_hp_vital)
+        self.terrain_action_check_dist = utils.u32_to_f32(self.terrain_action_check_dist)
+        self.adjust_wall_point_offset = utils.u32_to_f32(self.adjust_wall_point_offset)
         self.weight = enum_HitWeight(self.weight)
-        self.dying_village_hp_vital_rate = utils.hex_to_f32(hex(self.dying_village_hp_vital_rate)[2:])
-        self.dying_low_level_hp_vital_rate = utils.hex_to_f32(hex(self.dying_low_level_hp_vital_rate)[2:])
-        self.dying_high_level_hp_vital_rate = utils.hex_to_f32(hex(self.dying_high_level_hp_vital_rate)[2:])
-        self.capture_village_hp_vital_rate = utils.hex_to_f32(hex(self.capture_village_hp_vital_rate)[2:])
-        self.capture_low_level_hp_vital_rate = utils.hex_to_f32(hex(self.capture_low_level_hp_vital_rate)[2:])
-        self.capture_high_level_hp_vital_rate = utils.hex_to_f32(hex(self.capture_high_level_hp_vital_rate)[2:])
-        self.self_sleep_recover_hp_vital_rate = utils.hex_to_f32(hex(self.self_sleep_recover_hp_vital_rate)[2:])
-        self.self_sleep_time = utils.hex_to_f32(hex(self.self_sleep_time)[2:])
+        self.dying_village_hp_vital_rate = utils.u32_to_f32(self.dying_village_hp_vital_rate)
+        self.dying_low_level_hp_vital_rate = utils.u32_to_f32(self.dying_low_level_hp_vital_rate)
+        self.dying_high_level_hp_vital_rate = utils.u32_to_f32(self.dying_high_level_hp_vital_rate)
+        self.capture_village_hp_vital_rate = utils.u32_to_f32(self.capture_village_hp_vital_rate)
+        self.capture_low_level_hp_vital_rate = utils.u32_to_f32(self.capture_low_level_hp_vital_rate)
+        self.capture_high_level_hp_vital_rate = utils.u32_to_f32(self.capture_high_level_hp_vital_rate)
+        self.self_sleep_recover_hp_vital_rate = utils.u32_to_f32(self.self_sleep_recover_hp_vital_rate)
+        self.self_sleep_time = utils.u32_to_f32(self.self_sleep_time)
         self.in_combat_self_sleep_flag = bool(self.in_combat_self_sleep_flag)
-        self.dummy_shadow_scale = utils.hex_to_f32(hex(self.dummy_shadow_scale)[2:])
-        if self.max_num_for_normal_quest > 0x7FFFFFFF: self.max_num_for_normal_quest -= (0xFFFFFFFF + 1)
-        if self.max_num_for_hyakuryu_quest > 0x7FFFFFFF: self.max_num_for_hyakuryu_quest -= (0xFFFFFFFF + 1)
-        if self.max_sound_damage_count > 0x7FFFFFFF: self.max_sound_damage_count -= (0xFFFFFFFF + 1)
+        self.dummy_shadow_scale = utils.u32_to_f32(self.dummy_shadow_scale)
+        self.max_num_for_normal_quest = utils.u32_to_i32(self.max_num_for_normal_quest)
+        self.max_num_for_hyakuryu_quest = utils.u32_to_i32(self.max_num_for_hyakuryu_quest)
+        self.max_sound_damage_count = utils.u32_to_i32(self.max_sound_damage_count)

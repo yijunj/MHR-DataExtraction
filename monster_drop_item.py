@@ -1,6 +1,6 @@
+import utils
 from utils import OrderedAttibuteClass
 from enums import *
-import utils
 
 # This correspondes to part of MHRice lot.rs
 # Classes for monster drop item data, which will become part of Monster class
@@ -12,7 +12,7 @@ class EnemyDropItemInfo(OrderedAttibuteClass):
         self.drop_item_model_type = 'u32'
     def human_readable(self):
         self.enemy_reward_pop_type = enum_EnemyRewardPopTypes(self.enemy_reward_pop_type)
-        if self.drop_item_model_type > 0x7FFFFFFF: self.drop_item_model_type -= (0xFFFFFFFF + 1)
+        self.drop_item_model_type = utils.u32_to_i32(self.drop_item_model_type)
 
 class EnemyDropItemTableData(OrderedAttibuteClass):
     def __init__(self):
@@ -20,7 +20,7 @@ class EnemyDropItemTableData(OrderedAttibuteClass):
         self.enemy_drop_item_info_list = ['EnemyDropItemInfo']
         self.max_num = 'u32'
     def human_readable(self):
-        if self.max_num > 0x7FFFFFFF: self.max_num -= (0xFFFFFFFF + 1)
+        self.max_num = utils.u32_to_i32(self.max_num)
 
 class EnemyDropItemInfoData(OrderedAttibuteClass):
     def __init__(self):

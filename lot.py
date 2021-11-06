@@ -77,9 +77,8 @@ class PartsTypeTextUserDataTextInfo(OrderedAttibuteClass):
         self.text_bytes_for_monster_list = 'u128'
     def human_readable(self):
         self.enemy_type_list = [enum_EmTypes(i) for i in self.enemy_type_list]
-        self.text_bytes = [int(hex(self.text_bytes)[2*i+2:2*i+4], 16) for i in reversed(range(16))]
-        self.text_bytes_for_monster_list =\
-            [int(hex(self.text_bytes_for_monster_list)[2*i+2:2*i+4], 16) for i in reversed(range(16))]
+        self.text_bytes = bytes_Guid(self.text_bytes)
+        self.text_bytes_for_monster_list = bytes_Guid(self.text_bytes_for_monster_list)
 
 class PartsTypeInfo(OrderedAttibuteClass):
     def __init__(self):

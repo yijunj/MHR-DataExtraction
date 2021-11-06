@@ -1,6 +1,6 @@
+import utils
 from utils import OrderedAttibuteClass
 from enums import *
-import utils
 
 # This correspondes to MHRice condition_damage_data.rs
 # Classes for monster condition data, which will become part of Monster class
@@ -13,11 +13,11 @@ class StockData(OrderedAttibuteClass):
         self.sub_value = 'u32'
         self.sub_interval = 'u32'
     def human_readable(self):
-        self.default_limit = utils.hex_to_f32(hex(self.default_limit)[2:])
-        self.add_limit = utils.hex_to_f32(hex(self.add_limit)[2:])
-        self.max_limit = utils.hex_to_f32(hex(self.max_limit)[2:])
-        self.sub_value = utils.hex_to_f32(hex(self.sub_value)[2:])
-        self.sub_interval = utils.hex_to_f32(hex(self.sub_interval)[2:])
+        self.default_limit = utils.u32_to_f32(self.default_limit)
+        self.add_limit = utils.u32_to_f32(self.add_limit)
+        self.max_limit = utils.u32_to_f32(self.max_limit)
+        self.sub_value = utils.u32_to_f32(self.sub_value)
+        self.sub_interval = utils.u32_to_f32(self.sub_interval)
 
 class ConditionDamageDataBase(OrderedAttibuteClass):
     def __init__(self):
@@ -31,13 +31,13 @@ class ConditionDamageDataBase(OrderedAttibuteClass):
         self.damage_interval = 'u32'
         self.damage = 'u32'
     def human_readable(self):
-        self.max_stock = utils.hex_to_f32(hex(self.max_stock)[2:])
-        self.active_time = utils.hex_to_f32(hex(self.active_time)[2:])
-        self.sub_active_time = utils.hex_to_f32(hex(self.sub_active_time)[2:])
-        self.min_active_time = utils.hex_to_f32(hex(self.min_active_time)[2:])
-        self.add_tired_time = utils.hex_to_f32(hex(self.add_tired_time)[2:])
-        self.damage_interval = utils.hex_to_f32(hex(self.damage_interval)[2:])
-        self.damage = utils.hex_to_f32(hex(self.damage)[2:])
+        self.max_stock = utils.u32_to_f32(self.max_stock)
+        self.active_time = utils.u32_to_f32(self.active_time)
+        self.sub_active_time = utils.u32_to_f32(self.sub_active_time)
+        self.min_active_time = utils.u32_to_f32(self.min_active_time)
+        self.add_tired_time = utils.u32_to_f32(self.add_tired_time)
+        self.damage_interval = utils.u32_to_f32(self.damage_interval)
+        self.damage = utils.u32_to_f32(self.damage)
 
 class ParalyzeDamageData(ConditionDamageDataBase):
     def __init__(self):
@@ -67,15 +67,15 @@ class StaminaDamageData(ConditionDamageDataBase):
         self.preset_type = 'u32'
     def human_readable(self):
         super().human_readable()
-        self.sub_stamina = utils.hex_to_f32(hex(self.sub_stamina)[2:])
+        self.sub_stamina = utils.u32_to_f32(self.sub_stamina)
 
 class FlashDamageLvData(OrderedAttibuteClass):
     def __init__(self):
         self.active_count = 'u32'
         self.active_time = 'u32'
     def human_readable(self):
-        if self.active_count > 0x7FFFFFFF: self.active_count -= (0xFFFFFFFF + 1)
-        self.active_time = utils.hex_to_f32(hex(self.active_time)[2:])
+        self.active_count = utils.u32_to_i32(self.active_count)
+        self.active_time = utils.u32_to_f32(self.active_time)
 
 class FlashDamageData(ConditionDamageDataBase):
     def __init__(self):
@@ -88,10 +88,10 @@ class FlashDamageData(ConditionDamageDataBase):
         self.preset_type = 'u32'
     def human_readable(self):
         super().human_readable()
-        self.ignore_refresh_stance = enum_StanceStatusFlags(self.ignore_refresh_stance)
-        self.max_distance = utils.hex_to_f32(hex(self.max_distance)[2:])
-        self.min_distance = utils.hex_to_f32(hex(self.min_distance)[2:])
-        self.angle = utils.hex_to_f32(hex(self.angle)[2:])
+        self.ignore_refresh_stance = bitflags_StanceStatusFlags(self.ignore_refresh_stance)
+        self.max_distance = utils.u32_to_f32(self.max_distance)
+        self.min_distance = utils.u32_to_f32(self.min_distance)
+        self.angle = utils.u32_to_f32(self.angle)
 
 class PoisonDamageData(ConditionDamageDataBase):
     def __init__(self):
@@ -107,7 +107,7 @@ class BlastDamageData(ConditionDamageDataBase):
         self.preset_type = 'u32'
     def human_readable(self):
         super().human_readable()
-        self.blast_damage = utils.hex_to_f32(hex(self.blast_damage)[2:])
+        self.blast_damage = utils.u32_to_f32(self.blast_damage)
 
 class MarionetteStartDamageData(ConditionDamageDataBase):
     def __init__(self):
@@ -117,7 +117,7 @@ class MarionetteStartDamageData(ConditionDamageDataBase):
     def human_readable(self):
         super().human_readable()
         self.use_data = enum_UseDataType(self.use_data)
-        self.nora_first_limit = utils.hex_to_f32(hex(self.nora_first_limit)[2:])
+        self.nora_first_limit = utils.u32_to_f32(self.nora_first_limit)
 
 class AdjustMeatDownData(OrderedAttibuteClass):
     def __init__(self):
@@ -125,9 +125,9 @@ class AdjustMeatDownData(OrderedAttibuteClass):
         self.soft_meat_adjust_value = 'u32'
         self.judge_meat_value = 'u32'
     def human_readable(self):
-        self.hard_meat_adjust_value = utils.hex_to_f32(hex(self.hard_meat_adjust_value)[2:])
-        self.soft_meat_adjust_value = utils.hex_to_f32(hex(self.soft_meat_adjust_value)[2:])
-        self.judge_meat_value = utils.hex_to_f32(hex(self.judge_meat_value)[2:])
+        self.hard_meat_adjust_value = utils.u32_to_f32(self.hard_meat_adjust_value)
+        self.soft_meat_adjust_value = utils.u32_to_f32(self.soft_meat_adjust_value)
+        self.judge_meat_value = utils.u32_to_f32(self.judge_meat_value)
 
 class WaterDamageData(ConditionDamageDataBase):
     def __init__(self):
@@ -145,7 +145,7 @@ class FireDamageData(ConditionDamageDataBase):
         self.preset_type = 'u32'
     def human_readable(self):
         super().human_readable()
-        self.hit_damage_rate = utils.hex_to_f32(hex(self.hit_damage_rate)[2:])
+        self.hit_damage_rate = utils.u32_to_f32(self.hit_damage_rate)
 
 class IceDamageData(ConditionDamageDataBase):
     def __init__(self):
@@ -154,7 +154,7 @@ class IceDamageData(ConditionDamageDataBase):
         self.preset_type = 'u32'
     def human_readable(self):
         super().human_readable()
-        self.motion_speed_rate = utils.hex_to_f32(hex(self.motion_speed_rate)[2:])
+        self.motion_speed_rate = utils.u32_to_f32(self.motion_speed_rate)
 
 class ThunderAdjustParamData(OrderedAttibuteClass):
     def __init__(self):
@@ -163,10 +163,10 @@ class ThunderAdjustParamData(OrderedAttibuteClass):
         self.hit_damage_to_stun_min = 'u32'
         self.default_stun_damage_rate = 'u32'
     def human_readable(self):
-        self.hit_damage_to_stun_rate = utils.hex_to_f32(hex(self.hit_damage_to_stun_rate)[2:])
-        self.hit_damage_to_stun_max = utils.hex_to_f32(hex(self.hit_damage_to_stun_max)[2:])
-        self.hit_damage_to_stun_min = utils.hex_to_f32(hex(self.hit_damage_to_stun_min)[2:])
-        self.default_stun_damage_rate = utils.hex_to_f32(hex(self.default_stun_damage_rate)[2:])
+        self.hit_damage_to_stun_rate = utils.u32_to_f32(self.hit_damage_to_stun_rate)
+        self.hit_damage_to_stun_max = utils.u32_to_f32(self.hit_damage_to_stun_max)
+        self.hit_damage_to_stun_min = utils.u32_to_f32(self.hit_damage_to_stun_min)
+        self.default_stun_damage_rate = utils.u32_to_f32(self.default_stun_damage_rate)
 
 class ThunderDamageData(ConditionDamageDataBase):
     def __init__(self):
@@ -177,7 +177,7 @@ class ThunderDamageData(ConditionDamageDataBase):
         self.preset_type = 'u32'
     def human_readable(self):
         super().human_readable()
-        if self.stun_active_limit > 0x7FFFFFFF: self.stun_active_limit -= (0xFFFFFFFF + 1)
+        self.stun_active_limit = utils.u32_to_i32(self.stun_active_limit)
 
 class FallTrapDamageData(ConditionDamageDataBase):
     def __init__(self):
@@ -188,9 +188,9 @@ class FallTrapDamageData(ConditionDamageDataBase):
         self.preset_type = 'u32'
     def human_readable(self):
         super().human_readable()
-        self.render_offset_y = utils.hex_to_f32(hex(self.render_offset_y)[2:])
-        self.render_offset_speed = utils.hex_to_f32(hex(self.render_offset_speed)[2:])
-        self.render_offset_reset_time = utils.hex_to_f32(hex(self.render_offset_reset_time)[2:])
+        self.render_offset_y = utils.u32_to_f32(self.render_offset_y)
+        self.render_offset_speed = utils.u32_to_f32(self.render_offset_speed)
+        self.render_offset_reset_time = utils.u32_to_f32(self.render_offset_reset_time)
 
 class FallQuickSandDamageData(ConditionDamageDataBase):
     def __init__(self):
@@ -201,9 +201,9 @@ class FallQuickSandDamageData(ConditionDamageDataBase):
         self.preset_type = 'u32'
     def human_readable(self):
         super().human_readable()
-        self.render_offset_y = utils.hex_to_f32(hex(self.render_offset_y)[2:])
-        self.render_offset_speed = utils.hex_to_f32(hex(self.render_offset_speed)[2:])
-        self.render_offset_reset_time = utils.hex_to_f32(hex(self.render_offset_reset_time)[2:])
+        self.render_offset_y = utils.u32_to_f32(self.render_offset_y)
+        self.render_offset_speed = utils.u32_to_f32(self.render_offset_speed)
+        self.render_offset_reset_time = utils.u32_to_f32(self.render_offset_reset_time)
 
 class FallOtomoTrapDamageData(ConditionDamageDataBase):
     def __init__(self):
@@ -212,7 +212,7 @@ class FallOtomoTrapDamageData(ConditionDamageDataBase):
         self.preset_type = 'u32'
     def human_readable(self):
         super().human_readable()
-        self.already_poison_stock_value = utils.hex_to_f32(hex(self.already_poison_stock_value)[2:])
+        self.already_poison_stock_value = utils.u32_to_f32(self.already_poison_stock_value)
 
 class ShockTrapDamageData(ConditionDamageDataBase):
     def __init__(self):
@@ -246,10 +246,10 @@ class SteelFangData(ConditionDamageDataBase):
         self.angle = 'u32'
     def human_readable(self):
         super().human_readable()
-        if self.active_limit_count > 0x7FFFFFFF: self.active_limit_count -= (0xFFFFFFFF + 1)
-        self.max_distance = utils.hex_to_f32(hex(self.max_distance)[2:])
-        self.min_distance = utils.hex_to_f32(hex(self.min_distance)[2:])
-        self.angle = utils.hex_to_f32(hex(self.angle)[2:])
+        self.active_limit_count = utils.u32_to_i32(self.active_limit_count)
+        self.max_distance = utils.u32_to_f32(self.max_distance)
+        self.min_distance = utils.u32_to_f32(self.min_distance)
+        self.angle = utils.u32_to_f32(self.angle)
 
 class EnemyConditionDamageData(OrderedAttibuteClass):
     def __init__(self):

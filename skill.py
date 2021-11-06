@@ -1,3 +1,4 @@
+import utils
 from utils import OrderedAttibuteClass
 from enums import *
 
@@ -12,8 +13,8 @@ class PlEquipSkillBaseUserDataParam(OrderedAttibuteClass):
         self.worth_point_list = 'u32'
     def human_readable(self):
         self.id = enum_PlEquipSkillId(self.id)
-        if self.max_level > 0x7FFFFFFF: self.max_level -= (0xFFFFFFFF + 1)
-        if self.icon_color > 0x7FFFFFFF: self.icon_color -= (0xFFFFFFFF + 1)
+        self.max_level = utils.u32_to_i32(self.max_level)
+        self.icon_color = utils.u32_to_i32(self.icon_color)
 
 class PlEquipSkillBaseUserData(OrderedAttibuteClass):
     def __init__(self):
@@ -59,38 +60,38 @@ class PlHyakuryuSkillBaseUserDataParam(OrderedAttibuteClass):
         self.overwrite_bottle_equip_flag = 'u32'
     def human_readable(self):
         self.id = enum_PlHyakuryuSkillId(self.id)
-        if self.item_color > 0x7FFFFFFF: self.item_color -= (0xFFFFFFFF + 1)
+        self.item_color = utils.u32_to_i32(self.item_color)
         self.apply_rule = enum_ApplyRules(self.apply_rule)
-        if self.add_atk > 0x7F: self.add_atk -= (0xFF + 1)
-        self.add_def_list = [i-(0xFF + 1) if i > 0x7F else i for i in self.add_def_list]
-        self.add_critical_rate_list = [i-(0xFF + 1) if i > 0x7F else i for i in self.add_critical_rate_list]
-        if self.add_main_element_val > 0x7F: self.add_main_element_val -= (0xFF + 1)
-        if self.add_sub_element_val > 0x7F: self.add_sub_element_val -= (0xFF + 1)
-        if self.add_bottle_element_val > 0x7F: self.add_bottle_element_val -= (0xFF + 1)
-        if self.add_insect_lv > 0x7F: self.add_insect_lv -= (0xFF + 1)
-        if self.add_recoil > 0x7F: self.add_recoil -= (0xFF + 1)
-        if self.add_reload > 0x7F: self.add_reload -= (0xFF + 1)
-        if self.add_fluctuation > 0x7F: self.add_fluctuation -= (0xFF + 1)
+        self.add_atk = utils.u8_to_i8(self.add_atk)
+        self.add_def_list = [utils.u8_to_i8(i) for i in self.add_def_list]
+        self.add_critical_rate_list = [utils.u8_to_i8(i) for i in self.add_critical_rate_list]
+        self.add_main_element_val = utils.u8_to_i8(self.add_main_element_val)
+        self.add_sub_element_val = utils.u8_to_i8(self.add_sub_element_val)
+        self.add_bottle_element_val = utils.u8_to_i8(self.add_bottle_element_val)
+        self.add_insect_lv = utils.u8_to_i8(self.add_insect_lv)
+        self.add_recoil = utils.u8_to_i8(self.add_recoil)
+        self.add_reload = utils.u8_to_i8(self.add_reload)
+        self.add_fluctuation = utils.u8_to_i8(self.add_fluctuation)
         self.add_bullet_type_list = [enum_BulletType(i) for i in self.add_bullet_type_list]
-        self.add_lb_bullet_num_list = [i-(0xFF + 1) if i > 0x7F else i for i in self.add_lb_bullet_num_list]
-        self.add_hb_bullet_num_list = [i-(0xFF + 1) if i > 0x7F else i for i in self.add_hb_bullet_num_list]
+        self.add_lb_bullet_num_list = [utils.u8_to_i8(i) for i in self.add_lb_bullet_num_list]
+        self.add_hb_bullet_num_list = [utils.u8_to_i8(i) for i in self.add_hb_bullet_num_list]
         self.add_rapid_shot_list = [enum_BulletType(i) for i in self.add_rapid_shot_list]
         self.add_build_up_bottle_type = enum_BottlePowerUpTypes(self.add_build_up_bottle_type)
         self.overwrite_flag_list = [bool(i) for i in self.overwrite_flag_list]
         self.overwrite_main_element_type = enum_ElementType(self.overwrite_main_element_type)
         self.overwrite_sub_element_type = enum_ElementType(self.overwrite_sub_element_type)
-        self.overwrite_sharpness_val_list = [i-(0xFFFFFFFF + 1) if i > 0x7FFFFFFF else i for i in self.overwrite_sharpness_val_list]
-        self.overwrite_takumi_val_list = [i-(0xFFFFFFFF + 1) if i > 0x7FFFFFFF else i for i in self.overwrite_takumi_val_list]
+        self.overwrite_sharpness_val_list = [utils.u32_to_i32(i) for i in self.overwrite_sharpness_val_list]
+        self.overwrite_takumi_val_list = [utils.u32_to_i32(i) for i in self.overwrite_takumi_val_list]
         self.overwrite_gl_fire_type = enum_GunLanceFireType(self.overwrite_gl_fire_type)
-        if self.overwrite_gl_fire_lv > 0x7FFFFFFF: self.overwrite_gl_fire_lv -= (0xFFFFFFFF + 1)
-        self.overwrite_concert_id_list = [i-(0xFFFFFFFF + 1) if i > 0x7FFFFFFF else i for i in self.overwrite_concert_id_list]
+        self.overwrite_gl_fire_lv = newtype_GunLanceFireLv(self.overwrite_gl_fire_lv)
+        self.overwrite_concert_id_list = [utils.u32_to_i32(i) for i in self.overwrite_concert_id_list]
         self.overwrite_caxe_bottle_type = enum_ChargeAxeBottleTypes(self.overwrite_caxe_bottle_type)
         self.overwrite_saxe_bottle_type = enum_SlashAxeBottleTypes(self.overwrite_saxe_bottle_type)
-        if self.overwrite_insect_lv > 0x7FFFFFFF: self.overwrite_insect_lv -= (0xFFFFFFFF + 1)
+        self.overwrite_insect_lv = newtype_InsectLevelTypes(self.overwrite_insect_lv)
         self.overwrite_hb_unique_bullet = enum_UniqueBulletType(self.overwrite_hb_unique_bullet)
         self.overwrite_charge_type_list = [enum_BowChargeTypes(i) for i in self.overwrite_charge_type_list]
-        if self.overwrite_charge_start_lv > 0x7FFFFFFF: self.overwrite_charge_start_lv -= (0xFFFFFFFF + 1)
-        if self.overwrite_curve_types > 0x7FFFFFFF: self.overwrite_curve_types -= (0xFFFFFFFF + 1)
+        self.overwrite_charge_start_lv = newtype_BowChargeStartLvTypes(self.overwrite_charge_start_lv)
+        self.overwrite_curve_types = utils.u32_to_i32(self.overwrite_curve_types)
         self.overwrite_bottle_equip_flag = enum_BowBottleTypes(self.overwrite_bottle_equip_flag)
 
 class PlHyakuryuSkillBaseUserData(OrderedAttibuteClass):
@@ -124,11 +125,11 @@ class DecorationsBaseUserDataParam(OrderedAttibuteClass):
         self.base_price = 'u32'
     def human_readable(self):
         self.id = enum_DecorationsId(self.id)
-        self.rare += 1
-        if self.icon_color > 0x7FFFFFFF: self.icon_color -= (0xFFFFFFFF + 1)
-        if self.decoration_lv > 0x7FFFFFFF: self.decoration_lv -= (0xFFFFFFFF + 1)
+        self.rare = newtype_RareTypes(self.rare)
+        self.icon_color = utils.u32_to_i32(self.icon_color)
+        self.decoration_lv = utils.u32_to_i32(self.decoration_lv)
         self.skill_id_list = [enum_PlEquipSkillId(i) for i in self.skill_id_list]
-        self.skill_lv_list = [i-(0xFFFFFFFF + 1) if i > 0x7FFFFFFF else i for i in self.skill_lv_list]
+        self.skill_lv_list = [utils.u32_to_i32(i) for i in self.skill_lv_list]
 
 class DecorationsBaseUserData(OrderedAttibuteClass):
     def __init__(self):
@@ -146,7 +147,7 @@ class DecorationsProductUserDataParam(OrderedAttibuteClass):
         self.id = enum_DecorationsId(self.id)
         self.item_flag = enum_ItemId(self.item_flag)
         self.enemy_flag = enum_EmTypes(self.enemy_flag)
-        if self.progress_flag > 0x7FFFFFFF: self.progress_flag -= (0xFFFFFFFF + 1)
+        self.progress_flag = utils.u32_to_i32(self.progress_flag)
         self.item_id_list = [enum_ItemId(i) for i in self.item_id_list]
 
 class DecorationsProductUserData(OrderedAttibuteClass):

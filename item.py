@@ -1,3 +1,4 @@
+import utils
 from utils import OrderedAttibuteClass
 from enums import *
 
@@ -36,23 +37,22 @@ class ItemUserDataParam(OrderedAttibuteClass):
         self.id = enum_ItemId(self.id)
         self.cariable_filter = enum_CarriableFilter(self.cariable_filter)
         self.type = enum_ItemTypes(self.type)
-        self.rare += 1
+        self.rare = newtype_RareTypes(self.rare)
         self.supply = bool(self.supply)
         self.show_item_window = bool(self.show_item_window)
         self.show_action_window = bool(self.show_action_window)
-        self.icon_item_rank = enum_IconRank(self.icon_item_rank)
         self.infinite = bool(self.infinite)
         self.default = bool(self.default)
         self.icon_can_eat = bool(self.icon_can_eat)
-        self.icon_item_rank = bool(self.icon_item_rank)
+        self.icon_item_rank = enum_IconRank(self.icon_item_rank)
         self.effect_rare = bool(self.effect_rare)
-        if self.icon_chara > 0x7FFFFFFF: self.icon_chara -= (0xFFFFFFFF + 1)
-        if self.icon_color > 0x7FFFFFFF: self.icon_color -= (0xFFFFFFFF + 1)
-        if self.se_type > 0x7FFFFFFF: self.se_type -= (0xFFFFFFFF + 1)
-        if self.item_action_type > 0x7FFFFFFF: self.item_action_type -= (0xFFFFFFFF + 1)
+        self.icon_chara = utils.u32_to_i32(self.icon_chara)
+        self.icon_color = utils.u32_to_i32(self.icon_color)
+        self.se_type = utils.u32_to_i32(self.se_type)
+        self.item_action_type = utils.u32_to_i32(self.item_action_type)
         self.rank_type = enum_RankTypes(self.rank_type)
         self.item_group = enum_ItemGroupTypes(self.item_group)
-        self.material_category = [enum_MaterialCategory(i) for i in self.material_category]
+        self.material_category = [newtype_MaterialCategory(i) for i in self.material_category]
 
 class ItemUserData(OrderedAttibuteClass):
     def __init__(self):

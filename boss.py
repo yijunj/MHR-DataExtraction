@@ -1,6 +1,6 @@
+import utils
 from utils import OrderedAttibuteClass
 from enums import *
-import utils
 
 # This correspondes to MHRice monster_list.rs
 # Classes for monster habitat data etc.
@@ -16,12 +16,11 @@ class PartData(OrderedAttibuteClass):
         self.em_meat = 'u32'
         self.em_meat_group_index = 'u32'
     def human_readable(self):
-        if self.part > 0x7FFFFFFF: self.part -= (0xFFFFFFFF + 1)
-        if self.circle_size > 0x7FFFFFFF: self.circle_size -= (0xFFFFFFFF + 1)
-        self.circle_pos_x = utils.hex_to_f32(hex(self.circle_pos_x)[2:])
-        self.circle_pos_y = utils.hex_to_f32(hex(self.circle_pos_y)[2:])
-        if self.em_meat > 0x7FFFFFFF: self.em_meat -= (0xFFFFFFFF + 1)
-        if self.em_meat_group_index > 0x7FFFFFFF: self.em_meat_group_index -= (0xFFFFFFFF + 1)
+        self.part = utils.u32_to_i32(self.part)
+        self.circle_size = utils.u32_to_i32(self.circle_size)
+        self.circle_pos_x = utils.u32_to_f32(self.circle_pos_x)
+        self.circle_pos_y = utils.u32_to_f32(self.circle_pos_y)
+        self.em_meat = utils.u32_to_i32(self.em_meat)
 
 class BitSetFlagHabitatType(OrderedAttibuteClass):
     def __init__(self):
@@ -36,7 +35,7 @@ class BossMonsterData(OrderedAttibuteClass):
         self.part_Table_data = ['PartData']
     def human_readable(self):
         self.em_type = enum_EmTypes(self.em_type)
-        if self.family_type > 0x7FFFFFFF: self.family_type -= (0xFFFFFFFF + 1)
+        self.family_type = utils.u32_to_i32(self.family_type)
         self.is_limit_open_lv = bool(self.is_limit_open_lv)
 
 class MonsterListBossData(OrderedAttibuteClass):

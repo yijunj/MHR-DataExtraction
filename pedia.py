@@ -3,6 +3,7 @@ from weapon import *
 import user
 import pickle
 
+# Gather user file data into one class
 class PediaUser(OrderedAttibuteClass):
     def __init__(self): # This initialization is just to remind you of the data types
         self.large_monsters = ['monster.Monster']
@@ -104,4 +105,4 @@ if __name__ == '__main__':
     with open('pedia_user.pickle', 'wb') as f:
         pickle.dump(pedia_user, f)
     print('Pedia saved as pickle file')
-    # user.print_hierarchical_object(pedia_user)
+    user.print_hierarchical_object(pedia_user)

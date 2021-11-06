@@ -1,6 +1,6 @@
+import utils
 from utils import OrderedAttibuteClass
 from enums import *
-import utils
 
 # This correspondes to part of MHRice parts_break_data.rs
 # Classes for monster part break data, which will become part of Monster class
@@ -16,16 +16,16 @@ class PartsBreakData(OrderedAttibuteClass):
         self.effect_element_id = 'u32'
         self.ignore_tag_value = 'u32'
     def human_readable(self):
-        if self.parts_condition_id > 0x7FFFFFFF: self.parts_condition_id -= (0xFFFFFFFF + 1)
-        if self.effect_container_id > 0x7FFFFFFF: self.effect_container_id -= (0xFFFFFFFF + 1)
-        if self.effect_element_id > 0x7FFFFFFF: self.effect_element_id -= (0xFFFFFFFF + 1)
+        self.parts_condition_id = utils.u32_to_i32(self.parts_condition_id)
+        self.effect_container_id = utils.u32_to_i32(self.effect_container_id)
+        self.effect_element_id = utils.u32_to_i32(self.effect_element_id)
 
 class ConditionPartsBreakData(OrderedAttibuteClass):
     def __init__(self):
         self.condition_id = 'u32'
         self.parts_break_data_list = ['PartsBreakData']
     def human_readable(self):
-        if self.condition_id > 0x7FFFFFFF: self.condition_id -= (0xFFFFFFFF + 1)
+        self.condition_id = utils.u32_to_i32(self.condition_id)
 
 class PartsBreakGroupData(OrderedAttibuteClass):
     def __init__(self):
@@ -42,14 +42,14 @@ class PartsLossData(OrderedAttibuteClass):
         self.on_ground_effect_container_id = 'u32'
         self.on_ground_effect_element_id = 'u32'
     def human_readable(self):
-        if self.parts_condition_id > 0x7FFFFFFF: self.parts_condition_id -= (0xFFFFFFFF + 1)
+        self.parts_condition_id = utils.u32_to_i32(self.parts_condition_id)
 
 class ConditionPartsLossData(OrderedAttibuteClass):
     def __init__(self):
         self.condition_id = 'u32'
         self.parts_loss_data = 'PartsLossData'
     def human_readable(self):
-        if self.condition_id > 0x7FFFFFFF: self.condition_id -= (0xFFFFFFFF + 1)
+        self.condition_id = utils.u32_to_i32(self.condition_id)
 
 class PartsLossGroupData(OrderedAttibuteClass):
     def __init__(self):

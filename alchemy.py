@@ -1,3 +1,4 @@
+import utils
 from utils import OrderedAttibuteClass
 from enums import *
 
@@ -15,8 +16,7 @@ class AlchemyPatturnUserDataParam(OrderedAttibuteClass):
         self.output_min_num = 'u32'
         self.output_max_num = 'u32'
     def human_readable(self):
-        if self.patturn > 0x7FFFFFFF: self.patturn -= (0xFFFFFFFF + 1)
-        self.patturn += 1
+        self.patturn  = newtype_AlchemyPatturnTypes(self.patturn)
         self.color = enum_ColorTypes(self.color)
         self.usable_item_list = [enum_ItemId(i) for i in self.usable_item_list]
 
@@ -35,10 +35,10 @@ class AlchemyPlSkillTableUserDataParam(OrderedAttibuteClass):
         self.miss_rate_list = ['u32']
         self.skill2_rate_list = ['u32']
     def human_readable(self):
-        if self.sort_id > 0x7FFFFFFF: self.sort_id -= (0xFFFFFFFF + 1)
+        self.sort_id = utils.u32_to_i32(self.sort_id)
         self.skill_id = enum_PlEquipSkillId(self.skill_id)
         self.grade = enum_GradeTypes(self.grade)
-        self.patturn += 1
+        self.patturn = newtype_AlchemyPatturnTypes(self.patturn)
 
 class AlchemyPlSkillTableUserData(OrderedAttibuteClass):
     def __init__(self):
@@ -58,7 +58,7 @@ class RareTypeTableUserDataParam(OrderedAttibuteClass):
         self.worth_point = 'u32'
         self.rare_type_list = ['u8']
     def human_readable(self):
-        self.rare_type_list = [i+1 for i in self.rare_type_list]
+        self.rare_type_list = [newtype_RareTypes(i) for i in self.rare_type_list]
 
 class RareTypeTableUserData(OrderedAttibuteClass):
     def __init__(self):
@@ -82,7 +82,7 @@ class SkillGradeLotRateTableUserDataParam(OrderedAttibuteClass):
         self.probability_list = ['u32']
         self.probability2_list = ['u32']
     def human_readable(self):
-        self.patturn_type += 1
+        self.patturn_type = newtype_AlchemyPatturnTypes(self.patturn_type)
 
 class SkillGradeLotRateTableUserData(OrderedAttibuteClass):
     def __init__(self):
