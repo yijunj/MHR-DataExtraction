@@ -6,7 +6,7 @@ mhrice is an awesome project and very instructive in understanding the data stru
 ## Preparation
 This project starts with unpacked game data, so rather than working on the .pak file (which mhrice does), I already have a file structure of nested folders. To get this file structure, please follow these steps:
 
-* Download raw data files from a hacked Switch. These links can be helpful: [recovery mode](https://www.youtube.com/watch?v=3-UeB_enPrM), [dump files](https://yuzu-emu.org/help/quickstart/#dumping-cartridge-games), and [my dumping notes](HOW_TO_DUMP.md).
+* Download raw data files from a hacked Switch. These links can be helpful: [recovery mode](https://www.youtube.com/watch?v=3-UeB_enPrM), [file dumping](https://yuzu-emu.org/help/quickstart/#dumping-cartridge-games), and [my dumping notes](HOW_TO_DUMP.md).
 * There could be multiple raw files, with extensions like .xc0 or .xc1. Merge them into one .xci file. Merging is as easy as running the `copy /b "File1.xc0" + "File2.xc1" "FileOutput.xci"` command.
 * Use [hactool](https://github.com/SciresM/hactool) to unpack the .xci file and obtain a .pak file (default name is re_chunk_000.pak).
 * Use [REtool](https://residentevilmodding.boards.net/thread/10567/pak-tex-editing-tool) to unpack the .pak file and obtain the desired nested folders of game data. You will need a file list, which can be found [here](https://raw.githubusercontent.com/mhvuze/MonsterHunterRiseModding/main/files/mhrise.list). Save the following code as a batch (.bat) file and drag your .pak file over it to unpack.
