@@ -2,19 +2,22 @@
 ## Preparing SD card
 ### Install/Update Atmosphere and Hekate
 Atmosphere is like the operation system of CFW mode, and Hekate is how you boot Switch into Atmosphere.
-Copied from https://nh-server.github.io/switch-guide/extras/updating/
+
+The following is partially copied from https://nh-server.github.io/switch-guide/extras/updating/.
 
 #### Updating Atmosphere
 When a new version of Atmosphere releases, you can update Atmosphere by following these steps:
 
-Turn off your Nintendo Switch and plug your SD card in your computer.
-Download the latest release of Atmosphere (Download the atmosphere-(version)-master-(version)+hbl-(version)+hbmenu-(version).zip release of Atmosphere.)
+Download the latest release of Atmosphere (Download the `atmosphere-(version)-master-(version)+hbl-(version)+hbmenu-(version).zip` release of Atmosphere.)
+
 Copy the contents of the Atmosphere .zip file to the root of your SD card.
 
-Download fusee.bin from Atmosphere GitHub and put it under SD card bootloader/payloads directory, and then add this to bootloader/hekate_ipl.ini
+Download `fusee.bin` from Atmosphere GitHub and put it under SD card `bootloader/payloads` directory, and then add this to `bootloader/hekate_ipl.ini`
 
+```
 [Payload Fusee]
 fss0=bootloader/payloads/fusee.bin
+```
 
 If you are prompted to overwrite files, do so.
 (If your hekate is not on the latest version) Update hekate via the steps below.
@@ -23,10 +26,12 @@ Put your SD card back in your Switch and launch CFW.
 #### Updating Hekate
 When a new version of Hekate releases, you can update by following these steps:
 
-Turn off your Nintendo Switch and plug your SD card in your computer.
-Download the latest version of Hekate (Download the hekate_ctcaer_(version).zip release of hekate).
+Download the latest version of Hekate (Download the `hekate_ctcaer_(version).zip` release of hekate).
+
 Copy the bootloader folder from the Hekate .zip file to the root of your SD card. If you are asked to overwrite or merge files while copying, say yes to merge/overwrite them.
+
 Put your SD card back in your Switch and launch Hekate.
+
 Go to the Options tab at the top right of the screen. Turn "Update Reboot 2 Payload" on the bottom right ON (if it isn't on already). Tap "Save Options" at the bottom of the screen.
 
 #### Homebrew Appstore
