@@ -1,6 +1,8 @@
 # How to dump Switch game files
 Atmosphere is a Switch CFW (custom firmware) where you can dump game files, and Hekate is how you boot Switch into Atmosphere. To launch Hekate, you need to boot your Switch into RCM (recovery mode) first. This requires a prepared SD card, USB connection between Switch and PC, and a way to ground Switch pin #10 on the right joy-con slot.
 
+[This link](https://yuzu-emu.org/help/quickstart/#dumping-cartridge-games) talks about file dumping in more detail.
+
 ## Preparing SD card
 Please check [this useful reference](https://nh-server.github.io/switch-guide/extras/updating/).
 
