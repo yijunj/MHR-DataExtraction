@@ -2,7 +2,7 @@ import shutil
 import os
 import json
 
-pak_dir = 'M:\\MHR game data extraction\\[PAK TO DATA] Switch RETool hacking\\re_chunk_000\\natives\\NSW'
+pak_dir = 'M:\\MHR game data extraction\\[PAK TO DATA] Switch RETool hacking\\natives\\NSW'
 
 # Reads file names and directories of the relevant user files
 with open('user_file_list_excl_monsters.csv', 'r') as f:
@@ -41,7 +41,10 @@ for id in range(1000):
             from_path = os.path.join(pak_dir,\
                 'enemy\\em{:03}\\{:02}\\user_data\\em{:03}_{:02}_{}.user.2'.format(id, sub_id, id, sub_id, data_type))
             to_path = 'monster\\em{:03}\\{:02}\\em{:03}_{:02}_{}.user.2'.format(id, sub_id, id, sub_id, data_type)
-            shutil.copy2(from_path, to_path)
+            try:
+                shutil.copy2(from_path, to_path)
+            except FileNotFoundError:
+                print('Cannot find path {}'.format(from_path))
         if id in large_monster_ids.keys():
             large_monster_ids[id].append(sub_id)
         else:
@@ -66,7 +69,10 @@ for id in range(1000):
             from_path = os.path.join(pak_dir,\
                 'enemy\\ems{:03}\\{:02}\\user_data\\ems{:03}_{:02}_{}.user.2'.format(id, sub_id, id, sub_id, data_type))
             to_path = 'monster\\ems{:03}\\{:02}\\ems{:03}_{:02}_{}.user.2'.format(id, sub_id, id, sub_id, data_type)
-            shutil.copy2(from_path, to_path)
+            try:
+                shutil.copy2(from_path, to_path)
+            except FileNotFoundError:
+                print('Cannot find path {}'.format(from_path))
         if id in small_monster_ids.keys():
             small_monster_ids[id].append(sub_id)
         else:
