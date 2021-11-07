@@ -17,7 +17,7 @@ def enum_GradeTypes(type_id):
     return type_list[type_id]
 
 def enum_GradeTypesForSlotNumTable(type_id):
-    type_list = ['C', 'B', 'A', 'S', 'None']
+    type_list = ['C', 'B', 'A', 'S', None]
     return type_list[type_id]
 
 ########################################
@@ -31,7 +31,7 @@ def enum_PlArmorId(armor_id):
     if armor_id == 0:
         return 'TableNone'
     elif armor_id == 0x0C000000:
-        return 'None'
+        return None
     elif armor_id == 0x00010001:
         return 'ChangedEx'
     else:
@@ -65,11 +65,11 @@ def enum_PlOverwearId(overwear_id):
 ########################################
 # These are listed in MHRice collision.rs
 def enum_CustomShapeType(type_id):
-    type_list = ['None', 'Cylinder', 'HoledCylinder', 'TrianglePole', 'Donuts', 'DonutsCylinder']
+    type_list = [None, 'Cylinder', 'HoledCylinder', 'TrianglePole', 'Donuts', 'DonutsCylinder']
     return type_list[type_id]
 
 def enum_LimitedHitAttr(type_id):
-    type_list = ['None', 'LimitedStan']
+    type_list = [None, 'LimitedStan']
     return type_list[type_id]
 
 def enum_HitSoundAttr(type_id):
@@ -109,11 +109,11 @@ def enum_ConditionDamageDataUsed(type_id):
 ########################################
 # These are listed in MHRice data_tune.rs
 def enum_ExtractiveType(type_id):
-    type_list = ['Red', 'White', 'Orange', 'None']
+    type_list = ['Red', 'White', 'Orange', None]
     return type_list[type_id]
 
 def enum_PartsBreakDataIgnoreCondition(type_id):
-    type_list = ['None', 'InTimes', 'Equal']
+    type_list = [None, 'InTimes', 'Equal']
     return type_list[type_id]
 
 def enum_PermitDamageAttrEnum(type_id):
@@ -144,7 +144,7 @@ def enum_ItemTypes(type_id):
     return type_list[type_id]
 
 def enum_IconRank(type_id):
-    type_list = ['None', 'Great', 'Lv1', 'Lv2', 'Lv3']
+    type_list = [None, 'Great', 'Lv1', 'Lv2', 'Lv3']
     return type_list[type_id]
 
 def enum_RankTypes(type_id):
@@ -159,7 +159,7 @@ def enum_ItemId(item_id):
     if item_id == 0:
         return 'Null'
     elif item_id == 0x04000000:
-        return 'None'
+        return None
     elif item_id & 0xFFFF0000 == 0x04100000:
         return 'Normal({})'.format(item_id & 0x0000FFFF)
     else:
@@ -178,18 +178,18 @@ def enum_QuestRank(type_id):
     return type_list[type_id]
 
 def enum_EnemyRewardPopTypes(type_id):
-    type_list = ['None', 'MainBody', 'PartsLoss1', 'PartsLoss2', 'DropItem1', 'DropItem2',\
+    type_list = [None, 'MainBody', 'PartsLoss1', 'PartsLoss2', 'DropItem1', 'DropItem2',\
                 'DropItem3', 'DropItem4', 'DropItem5', 'DropItem6', 'Unique']
     return type_list[type_id]
 
 def enum_BrokenPartsTypes(type_id):
     if type_id == 0:
-        return 'None'
+        return None
     else:
         return type_id - 1
 
 def enum_BreakLvTypes(type_id):
-    type_list = ['None', 'Lv1', 'Lv2', 'Lv3']
+    type_list = [None, 'Lv1', 'Lv2', 'Lv3']
     return type_list[type_id]
 
 def enum_EnemyPartsBreakRewardDataConditionType(type_id):
@@ -211,18 +211,18 @@ def enum_EnemyLevel(type_id):
     return type_list[type_id]
 
 def enum_QuestOrderType(type_id):
-    type_list = ['None', 'Under2', 'H2', 'H3', 'H4', 'H5', 'H6', 'H7', 'H8', 'H20', 'H30', 'H40', 'H50', 'H90', 'H100']
+    type_list = [None, 'Under2', 'H2', 'H3', 'H4', 'H5', 'H6', 'H7', 'H8', 'H20', 'H30', 'H40', 'H50', 'H90', 'H100']
     return type_list[type_id]
 
 def enum_QuestTargetType(type_id):
-    type_list = ['None', 'ItemGet', 'Hunting', 'Kill', 'Capture', 'AllMainEnemy', 'EmTotal', 'FinalBarrierDefense', 'FortLevelUp',\
+    type_list = [None, 'ItemGet', 'Hunting', 'Kill', 'Capture', 'AllMainEnemy', 'EmTotal', 'FinalBarrierDefense', 'FortLevelUp',\
                 'PlayerDown', 'FinalBoss', 'HuntingMachine', 'DropItem', 'EmStun', 'EmElement', 'EmCondition', 'EmCntWeapon',\
                 'EmCntHmBallista', 'EmCntHmCannon', 'EmCntHmGatling', 'EmCntHmTrap', 'EmCntHmFlameThrower', 'EmCntHmNpc',\
                 'EmCntHmDragnator', 'ExtraEmRunaway']
     return type_list[type_id]
 
 def enum_BossSetCondition(type_id):
-    type_list = ['None', 'Default', 'Free1', 'Free2', 'Free3', 'Timer1', 'Timer2', 'Em1Hp', 'Em2Hp', 'Em3Hp', 'Em4Hp', 'Em5Hp', 'HpEmx1',\
+    type_list = [None, 'Default', 'Free1', 'Free2', 'Free3', 'Timer1', 'Timer2', 'Em1Hp', 'Em2Hp', 'Em3Hp', 'Em4Hp', 'Em5Hp', 'HpEmx1',\
                 'U13', 'U14', 'U15']
     # Comment in MHRice: TODO: this depends on version
     # U13: INIT_RANDOM (v6), HP_EMx2 (v7)
@@ -231,15 +231,17 @@ def enum_BossSetCondition(type_id):
     return type_list[type_id]
 
 def enum_SwapSetCondition(type_id):
-    type_list = ['None', 'QuestTimer']
+    type_list = [None, 'QuestTimer']
     return type_list[type_id]
 
 def enum_SwapStopType(type_id):
-    type_list = ['None', 'LowerHp']
+    type_list = [None, 'LowerHp']
+    if type_id > 1:
+        print(type_id)
     return type_list[type_id]
 
 def enum_SwapExecType(type_id):
-    type_list = ['None', 'FreeExtra']
+    type_list = [None, 'FreeExtra']
     return type_list[type_id]
 
 def enum_BattleBgmType(type_id):
@@ -265,18 +267,18 @@ def enum_NandoYuragi(type_id):
 # These are listed in MHRice skill.rs
 def enum_PlEquipSkillId(equip_skill_id):
     if equip_skill_id == 0:
-        return 'None'
+        return None
     else:
         return equip_skill_id - 1 # MHRice does not explicitly -1
 
 def enum_ApplyRules(type_id):
-    type_list = ['None', 'ElementNone', 'ElementFire', 'ElementWater', 'ElementThunder', 'ElementIce', 'ElementDragon',\
+    type_list = [None, 'ElementNone', 'ElementFire', 'ElementWater', 'ElementThunder', 'ElementIce', 'ElementDragon',\
                 'ElementPoison', 'ElementSleep', 'ElementParalyze', 'ElementBomb', 'ElementNotEqualMain', 'ElementFirstGroup',\
                 'CanEquipTargetBottle', 'Series064', 'Series065']
     return type_list[type_id]
 
 def enum_BulletType(type_id):
-    type_list = ['None', 'Normal1', 'Normal2', 'Normal3', 'Kantsu1', 'Kantsu2', 'Kantsu3', 'SanW1', 'SanW2', 'SanW3', 'SanO1',\
+    type_list = [None, 'Normal1', 'Normal2', 'Normal3', 'Kantsu1', 'Kantsu2', 'Kantsu3', 'SanW1', 'SanW2', 'SanW3', 'SanO1',\
                 'SanO2', 'SanO3', 'Tekko1', 'Tekko2', 'Tekko3', 'Kakusan1', 'Kakusan2', 'Kakusan3', 'Poison1', 'Poison2',\
                 'Paralyze1', 'Paralyze2', 'Sleep1', 'Sleep2', 'Genki1', 'Genki2', 'Heal1', 'Heal2', 'Kijin', 'Kouka', 'Fire',\
                 'FireKantsu', 'Water', 'WaterKantsu', 'Ice', 'IceKantsu', 'Thunder', 'ThunderKantsu', 'Dragon', 'DragonKantsu',\
@@ -284,11 +286,11 @@ def enum_BulletType(type_id):
     return type_list[type_id]
 
 def enum_BottlePowerUpTypes(type_id):
-    type_list = ['None', 'ShortRange', 'Poison', 'Paralyze', 'Sleep']
+    type_list = [None, 'ShortRange', 'Poison', 'Paralyze', 'Sleep']
     return type_list[type_id]
 
 def enum_ElementType(type_id):
-    type_list = ['None', 'Fire', 'Water', 'Thunder', 'Ice', 'Dragon', 'Poison', 'Sleep', 'Paralyze', 'Bomb']
+    type_list = [None, 'Fire', 'Water', 'Thunder', 'Ice', 'Dragon', 'Poison', 'Sleep', 'Paralyze', 'Bomb']
     return type_list[type_id]
 
 def enum_GunLanceFireType(type_id):
@@ -299,11 +301,11 @@ def newtype_GunLanceFireLv(type):
     return utils.u32_to_i32(type) + 1
 
 def enum_ChargeAxeBottleTypes(type_id):
-    type_list = ['None', 'StrongElement', 'Power']
+    type_list = [None, 'StrongElement', 'Power']
     return type_list[type_id]
 
 def enum_SlashAxeBottleTypes(type_id):
-    type_list = ['None', 'StrongElement', 'Power', 'Poison', 'Paralyze', 'None', 'None', 'DownStamina', 'Dragon']
+    type_list = [None, 'StrongElement', 'Power', 'Poison', 'Paralyze', None, None, 'DownStamina', 'Dragon']
     return type_list[type_id]
 
 def enum_UniqueBulletType(type_id):
@@ -311,17 +313,17 @@ def enum_UniqueBulletType(type_id):
     return type_list[type_id]
 
 def enum_BowChargeTypes(type_id):
-    type_list = ['None', 'BurstLv1', 'BurstLv2', 'BurstLv3', 'BurstLv4', 'BurstLv5', 'DiffusionLv1', 'DiffussionLv2', 'DiffusionLv3',\
+    type_list = [None, 'BurstLv1', 'BurstLv2', 'BurstLv3', 'BurstLv4', 'BurstLv5', 'DiffusionLv1', 'DiffussionLv2', 'DiffusionLv3',\
                 'DifussionLv4', 'DiffusionLv5', 'TransfixLv1', 'TransfixLv2', 'TransfixLv3', 'TransfixLv4', 'TransfixLv5']
     return type_list[type_id]
 
 def enum_BowBottleTypes(type_id):
-    type_list = ['ShortRange', 'Power', 'Poison', 'Paralyze', 'Sleep', 'Blast', 'DownStamina', 'Max', 'None']
+    type_list = ['ShortRange', 'Power', 'Poison', 'Paralyze', 'Sleep', 'Blast', 'DownStamina', 'Max', None]
     return type_list[type_id]
 
 def enum_PlHyakuryuSkillId(hyakuryu_skill_id):
     if hyakuryu_skill_id == 0:
-        return 'None'
+        return None
     else:
         return hyakuryu_skill_id - 1
 
@@ -333,14 +335,14 @@ def newtype_InsectLevelTypes(type):
 
 def enum_DecorationsId(decoration_id):
     if decoration_id == 0:
-        return 'None'
+        return None
     else:
         return decoration_id - 1
 
 ########################################
 # These are listed in MHRice weapon.rs
 def enum_PlWeaponElementTypes(type_id):
-    type_list = ['None', 'Fire', 'Water', 'Thunder', 'Ice', 'Dragon', 'Poison', 'Sleep', 'Paralyze', 'Bomb']
+    type_list = [None, 'Fire', 'Water', 'Thunder', 'Ice', 'Dragon', 'Poison', 'Sleep', 'Paralyze', 'Bomb']
     return type_list[type_id]
 
 def enum_WeaponId(weapon_id):
@@ -362,7 +364,7 @@ def enum_WeaponId(weapon_id):
     if weapon_id == 0:
         return 'Null'
     elif weapon_id == 0x08000000:
-        return 'None'
+        return None
     else:
         true_id = weapon_id & 0x0000FFFF
         weapon_type = weapon_id & 0xFFFF0000
@@ -370,7 +372,7 @@ def enum_WeaponId(weapon_id):
         return weapon_type_str + '({})'.format(true_id)
 
 def enum_Fluctuation(type_id):
-    type_list = ['None', 'LeftLittle', 'LeftMuch', 'RightLittle', 'RightMuch', 'RightAndLeftLittle', 'RightAndLeftMuch']
+    type_list = [None, 'LeftLittle', 'LeftMuch', 'RightLittle', 'RightMuch', 'RightAndLeftLittle', 'RightAndLeftMuch']
     return type_list[type_id]
 
 def enum_KakusanType(type_id):
@@ -378,24 +380,24 @@ def enum_KakusanType(type_id):
     return type_list[type_id]
 
 def enum_ShootType(type_id):
-    type_list = ['None', 'MovingShot', 'MovingShotReload', 'MovingShotSingleAuto', 'MovingReload', 'MovingReloadSingleAuto',\
+    type_list = [None, 'MovingShot', 'MovingShotReload', 'MovingShotSingleAuto', 'MovingReload', 'MovingReloadSingleAuto',\
                 'SingleAuto', 'MovingShotReloadSingleAuto']
     return type_list[type_id]
 
 def enum_TreeType(type_id):
     if type_id == 0:
-        return 'None'
+        return None
     else:
         return type_id - 2
 
 def enum_VillageProgress(progress_id):
     if progress_id == 0:
-        return 'None'
+        return None
     else:
         return progress_id - 1
 
 def enum_HallProgress(progress_id):
     if progress_id == 0:
-        return 'None'
+        return None
     else:
         return progress_id - 1

@@ -138,6 +138,8 @@ def read_rsz_chunk(data_type, data):
 
     for key in keys:
         attribute = getattr(object, key)
+        if attribute is None:
+            continue
         if type(attribute) == list: # This attribute takes in a list
             # The first list entry is the number of bits to encode each piece of data, but how many pieces?
             # i.e. how long will this list be? Well, normally, length of list is encoded in the next 32 bits
@@ -285,7 +287,11 @@ def read_user_file(filename):
     return object
 
 if __name__ == '__main__':
-    object = read_user_file('user\\item\\ItemData.user.2')
+    # weapon_type = 'GreatSword'
+    # filename = 'user\\weapon\\{}\\{}BaseData.user.2'.format(weapon_type, weapon_type)
+    filename = 'user\\quest\\NormalQuestData.user.2'
+    # filename = 'user\\skill\\PlHyakuryuSkillBaseData.user.2'
+    object = read_user_file(filename)
     # print_first_few_params(object, 1000, deliminator='\n\n')
     # print_last_few_params(object, 3, deliminator='\n\n')
     print_hierarchical_object(object)

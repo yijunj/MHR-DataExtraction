@@ -26,6 +26,12 @@ class OrderedAttibuteClass(object):
     def items(self):
         return self.__odict__.items()
 
+    def versioned(self, attribute, vmin, vmax):
+        if VERSION >= vmin and VERSION <= vmax:
+            return attribute
+        else:
+            return None
+
     # The initialization of class attributes says how many bits the data piece takes
     # I do not distinguish signed vs unsigned, int vs float vs bool -- type casting happens later
     # When reading the data, all numeric attributes are marked one of the following:
@@ -54,6 +60,8 @@ class OrderedAttibuteClass(object):
         for i in range(len(self.keys())):
             key_list = list(self.keys())
             dtype = getattr(self, key_list[i])
+            if dtype is None:
+                continue
             if type(dtype) == list:
                 if dtype[0].startswith('u') and dtype[0] != 'u32' and i+1 < len(key_list):
                     dtype_next = getattr(self, key_list[i+1])
@@ -68,7 +76,7 @@ class OrderedAttibuteClass(object):
     def clean_up(self):
         dummy_key_list = []
         for item in self.items():
-            if item[1] == 'p128' or item[1] == 'p64' or item[1] == 'p32':
+            if item[1] == 'p128' or item[1] == 'p64' or item[1] == 'p32' or item[1] == 'p16':
                 dummy_key_list.append(item[0])
         for key in dummy_key_list:
             delattr(self, key)
@@ -112,3 +120,4 @@ def hash_map():
     return data_type_dict
 
 RSZ_TYPE_MAP = hash_map()
+VERSION = 12

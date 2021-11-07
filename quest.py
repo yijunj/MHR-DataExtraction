@@ -28,8 +28,8 @@ class NormalQuestDataParam(OrderedAttibuteClass):
         self.boss_set_param = ['u32']
         self.swap_set_condition = ['u32']
         self.swap_set_param = ['u8']
-        self.swap_exit_time = 'u8'
-        self.is_swap_exit_marionette = 'u8'
+        self.swap_exit_time = self.versioned(['u8', 'u16'], 5, 0xFFFFFFFF)
+        self.is_swap_exit_marionette = self.versioned('u8', 5, 0xFFFFFFFF)
         self.swap_stop_type = 'u32'
         self.swap_stop_param = 'u32'
         self.swap_exec_type = 'u32'
@@ -38,9 +38,10 @@ class NormalQuestDataParam(OrderedAttibuteClass):
         self.rem_rank_point = 'u32'
         self.supply_tbl = 'u32'
         self.icon = ['u32']
-        self.is_from_npc = 'u8'
-        self.is_tutorial = 'u8'
-        self.fence_default_active = 'u8'
+        self.is_from_npc = self.versioned('u8,np', 0, 4)
+        self.is_tutorial = 'u8,np'
+        self.fence_default_active = 'u8,np'
+        self.aligner = 'p16'
         self.fence_active_sec = 'u16'
         self.fence_default_wait_sec = 'u16'
         self.fence_reload_sec = 'u16'
@@ -60,11 +61,13 @@ class NormalQuestDataParam(OrderedAttibuteClass):
         self.boss_em_type = [enum_EmTypes(i) for i in self.boss_em_type]
         self.boss_set_condition = [enum_BossSetCondition(i) for i in self.boss_set_condition]
         self.swap_set_condition = [enum_SwapSetCondition(i) for i in self.swap_set_condition]
-        self.is_swap_exit_marionette = bool(self.is_swap_exit_marionette)
+        if not self.is_swap_exit_marionette is None:
+            self.is_swap_exit_marionette = bool(self.is_swap_exit_marionette)
         self.swap_stop_type = enum_SwapStopType(self.swap_stop_type)
         self.swap_exec_type = enum_SwapExecType(self.swap_exec_type)
         self.icon = [utils.u32_to_i32(i) for i in self.icon]
-        self.is_from_npc = bool(self.is_from_npc)
+        if not self.is_from_npc is None:
+            self.is_from_npc = bool(self.is_from_npc)
         self.is_tutorial = bool(self.is_tutorial)
         self.fence_default_active = bool(self.fence_default_active)
         self.is_use_pillar = [bool(i) for i in self.is_use_pillar]
