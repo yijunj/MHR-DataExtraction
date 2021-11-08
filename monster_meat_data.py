@@ -6,15 +6,15 @@ from enums import *
 
 class MeatGroupInfo(OrderedAttibuteClass):
     def __init__(self):
-        self.slash = 'u16,np'
-        self.strike = 'u16,np'
-        self.shell = 'u16,np'
-        self.fire = 'u16,np'
-        self.water = 'u16,np'
-        self.ice = 'u16,np'
-        self.elect = 'u16,np'
-        self.dragon = 'u16,np'
-        self.piyo = 'u16,np'
+        self.slash = 'u16'
+        self.strike = 'u16'
+        self.shell = 'u16'
+        self.fire = 'u16'
+        self.water = 'u16'
+        self.ice = 'u16'
+        self.elect = 'u16'
+        self.dragon = 'u16'
+        self.piyo = 'u16'
 
 class EnemyMeatContainer(OrderedAttibuteClass):
     def __init__(self):

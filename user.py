@@ -69,6 +69,12 @@ def print_hierarchical_object(object, deliminator='\n'):
                 print_hierarchical_object(attribute, deliminator)
     print('},', end=deliminator)
 
+# Move cursor (pad) to the next multiple of given number of bits
+def pad_to_multiple_of(bit_num, data):
+    while data.pos % bit_num != 0:
+        data.pos += 1
+    return data
+
 # Reads meta data of a user data file
 def read_usr_head(data):
     magic = data.read('uintle:32')
@@ -132,9 +138,7 @@ def read_rsz_head(data):
 # Here I send in a certain data type, create an object, an read the file to fill in its attributes
 def read_rsz_chunk(data_type, data):
     object = eval(data_type)()
-    object.add_padding()
     keys = list(object.keys())
-    # print_object(object)
 
     for key in keys:
         attribute = getattr(object, key)
@@ -147,9 +151,11 @@ def read_rsz_chunk(data_type, data):
             # In this case, the initialization of this attibute has the number of bits as the second list entry
             # This number is represented here as length_bit_num
             if attribute[0] == 'string': # List of strings
+                data = pad_to_multiple_of(32, data)
                 length = data.read('uintle:32')
                 temp_list = []
                 for i in range(length):
+                    data = pad_to_multiple_of(32, data)
                     char_num = data.read('uintle:32')
                     string = ''
                     for j in range(char_num):
@@ -157,14 +163,13 @@ def read_rsz_chunk(data_type, data):
                     if string.endswith('\0'): # Excluding \0
                         string = string[:-1]
                     temp_list.append(string)
-                    while data.pos % 32 != 0: # If not read in a full block of 4 bytes, move the cursor to the next block
-                        data.pos += 1
                 setattr(object, key, temp_list)
             elif attribute[0].startswith('u'): # List of integers
                 if len(attribute) == 1:
                     length_bit_num = 32
                 else:
                     length_bit_num = int(attribute[1][1:])
+                data = pad_to_multiple_of(32, data) # List always starts at a fresh chunk of 4
                 length = data.read('uintle:' + str(length_bit_num)) # This is the length of the list
                 format = attribute[0][1:].split(',')
                 bit_num = int(format[0]) # This is the length of each entry in bits
@@ -172,20 +177,17 @@ def read_rsz_chunk(data_type, data):
                 for i in range(length):
                     temp_list.append(data.read('uintle:' + str(bit_num)))
                 setattr(object, key, temp_list)
-                if len(format) == 1: # Needs padding
-                    while data.pos % 32 != 0: # If not read in a full block of 4 bytes, move the cursor to the next block
-                        data.pos += 1
             else:
                 # This attribute 'eats' (absorbes other objects as its value)
                 # Need to move the cursor to the correct position
                 # Because after the parent node takes its children, the game file performs a count
                 # Jump over the data number counts and move the cursor to the next data chunk
-                while data.pos % 32 != 0:
-                    data.pos += 1
+                data = pad_to_multiple_of(32, data)
                 length = data.read('uintle:32')
                 data.pos += length * 32
         else:
             if attribute == 'string': # String data
+                data = pad_to_multiple_of(32, data)
                 char_num = data.read('uintle:32')
                 string = ''
                 for j in range(char_num):
@@ -193,26 +195,23 @@ def read_rsz_chunk(data_type, data):
                 if string.endswith('\0'): # Excluding \0
                     string = string[:-1]
                 setattr(object, key, string)
-                while data.pos % 32 != 0: # If not read in a full block of 4 bytes, move the cursor to the next block
-                    data.pos += 1
             elif attribute.startswith('u'): # Integer data
                 format = attribute[1:].split(',')
                 bit_num = int(format[0])
+                data = pad_to_multiple_of(bit_num, data)
                 setattr(object, key, data.read('uintle:' + str(bit_num)))
-                if len(format) == 1: # Needs padding
-                    while data.pos % 32 != 0: # If not read in a full block of 4 bytes, move the cursor to the next block
-                        data.pos += 1
             elif attribute.startswith('p'): # Pad until multiple of n-bit
                 bit_num = int(attribute[1:])
-                while data.pos % bit_num != 0:
-                    data.pos += 1
+                data = pad_to_multiple_of(bit_num, data)
             else:
                 # This attribute eats
                 # Need to move the cursor to the correct position
                 # Because after the parent node takes its children, the game file performs a count
                 # Jump over the data number counts and move the cursor to the next data chunk
+                data = pad_to_multiple_of(32, data)
                 data.pos += 32
 
+    # print_object(object)
     object.human_readable()
     # print(data.pos)
     # print_object(object)
@@ -235,7 +234,6 @@ def read_rsz(data_type_list, data):
     for data_type in data_type_list:
         # print(data_type)
         object = eval(data_type)()
-        object.add_padding()
         keys = list(object.keys())
 
         # Data that eats: loop through key in reverse order because of the stack nature
@@ -289,8 +287,7 @@ def read_user_file(filename):
 if __name__ == '__main__':
     # weapon_type = 'GreatSword'
     # filename = 'user\\weapon\\{}\\{}BaseData.user.2'.format(weapon_type, weapon_type)
-    filename = 'user\\quest\\NormalQuestData.user.2'
-    # filename = 'user\\skill\\PlHyakuryuSkillBaseData.user.2'
+    filename = 'user\\lot\\PartsTypeTextData.user.2'
     object = read_user_file(filename)
     # print_first_few_params(object, 1000, deliminator='\n\n')
     # print_last_few_params(object, 3, deliminator='\n\n')

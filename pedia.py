@@ -102,7 +102,7 @@ class PediaUser(OrderedAttibuteClass):
 if __name__ == '__main__':
     pedia_user = PediaUser()
     pedia_user.collect_user_data()
-    with open('pedia_user.pickle', 'wb') as f:
-        pickle.dump(pedia_user, f)
-    print('Pedia saved as pickle file')
-    user.print_hierarchical_object(pedia_user)
+    # with open('pedia_user.pickle', 'wb') as f:
+    #     pickle.dump(pedia_user, f)
+    # print('Pedia saved as pickle file')
+    # user.print_hierarchical_object(pedia_user)

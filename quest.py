@@ -38,9 +38,9 @@ class NormalQuestDataParam(OrderedAttibuteClass):
         self.rem_rank_point = 'u32'
         self.supply_tbl = 'u32'
         self.icon = ['u32']
-        self.is_from_npc = self.versioned('u8,np', 0, 4)
-        self.is_tutorial = 'u8,np'
-        self.fence_default_active = 'u8,np'
+        self.is_from_npc = self.versioned('u8', 0, 4)
+        self.is_tutorial = 'u8'
+        self.fence_default_active = 'u8'
         self.aligner = 'p16'
         self.fence_active_sec = 'u16'
         self.fence_default_wait_sec = 'u16'

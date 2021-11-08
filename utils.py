@@ -40,14 +40,8 @@ class OrderedAttibuteClass(object):
     # ['string'], ['u8'], ['u16'], ['u32']
     # and for those attributes that takes class objects, they are initialized with the corresponding class name
     # such as 'DataTunePartsLossData', or ['ArmorBaseUserDataParam'] (which is a list)
-    # In the game data file, normally data are organized in 32-bit chunks
-    # Data less than 32-bits may have paddings after them, but there are exceptions
-    # One exception exemple is, if there are several consecutive u8 data, only the last one has padding
-    # To deal with this, I write this add_padding() method, it adds ',np' after the bit-count mark when padding is required
-    # So 'u8,np' means "don't pad after this data", and 'u8' means "pad after this data"
-    # add_padding() should be called for each object, after they are initialized
-    # It takes care of almost all padding cases that I have observed from game data
-    # The few exceptions are taken care of by hand-coding padding marks in class definitions
+    # An n-bit data needs to start as data.pos being an integer multiple of n, otherwise needs padding in front
+
     # For numeric lists, game data always starts with a piece that says how many entries the list has
     # which is usually stored it 32 bits, but could also be less than that
     # In this case, the list is initialized as, say, ['u8, 'u16'], meaning 'list of u8 data, beginning with u16 entry count'
@@ -56,22 +50,6 @@ class OrderedAttibuteClass(object):
     # The user file reader moves the cursor to the appropriate location when it sees this
     # But since this attribute does not carry data, I delete it once the object has all data populated
     # which is the clean_up() method
-    def add_padding(self):
-        for i in range(len(self.keys())):
-            key_list = list(self.keys())
-            dtype = getattr(self, key_list[i])
-            if dtype is None:
-                continue
-            if type(dtype) == list:
-                if dtype[0].startswith('u') and dtype[0] != 'u32' and i+1 < len(key_list):
-                    dtype_next = getattr(self, key_list[i+1])
-                    if dtype[0] == dtype_next:
-                        dtype[0] += ',np'
-            else:
-                if dtype.startswith('u') and dtype != 'u32' and i+1 < len(key_list):
-                    dtype_next = getattr(self, key_list[i+1])
-                    if (dtype=='u16' and dtype_next=='u16') or dtype_next=='u8':
-                        setattr(self, key_list[i], dtype+',np')
 
     def clean_up(self):
         dummy_key_list = []

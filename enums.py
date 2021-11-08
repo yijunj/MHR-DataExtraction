@@ -89,8 +89,8 @@ def enum_BaseHitMarkType(type_id):
 
 ########################################
 # These are listed in MHRice common.rs
-def bytes_Guid(text_bytes):
-    return [int(hex(text_bytes)[2*i+2:2*i+4], 16) for i in reversed(range(16))]
+def bytes_Guid(text_bytes, bit_num):
+    return [int(hex(text_bytes)[2*i+2:2*i+4], 16) for i in reversed(range(int(bit_num/8)))]
 
 ########################################
 # These are listed in MHRice condition_damage_data.rs

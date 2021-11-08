@@ -72,13 +72,20 @@ class EnemyPartsBreakRewardData(OrderedAttibuteClass):
 class PartsTypeTextUserDataTextInfo(OrderedAttibuteClass):
     def __init__(self):
         self.enemy_type_list = ['u32']
-        self.aligner = 'p64'
-        self.text_bytes = 'u128'
-        self.text_bytes_for_monster_list = 'u128'
+        # self.aligner = 'p64'
+        self.text_bytes = 'u64'
+        self.text_bytes2 = 'u64'
+        self.text_bytes_for_monster_list = 'u64'
+        self.text_bytes_for_monster_list2 = 'u64'
     def human_readable(self):
         self.enemy_type_list = [enum_EmTypes(i) for i in self.enemy_type_list]
-        self.text_bytes = bytes_Guid(self.text_bytes)
-        self.text_bytes_for_monster_list = bytes_Guid(self.text_bytes_for_monster_list)
+        self.text_bytes = bytes_Guid(self.text_bytes, 64) + bytes_Guid(self.text_bytes2, 64)
+        self.text_bytes_for_monster_list = bytes_Guid(self.text_bytes_for_monster_list, 64) +\
+                                            bytes_Guid(self.text_bytes_for_monster_list2, 64)
+    def clean_up(self):
+        super().clean_up()
+        delattr(self, 'text_bytes2')
+        delattr(self, 'text_bytes_for_monster_list2')
 
 class PartsTypeInfo(OrderedAttibuteClass):
     def __init__(self):
