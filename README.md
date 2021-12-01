@@ -1,4 +1,4 @@
-# MHR_DataExtraction
+# MHR-DataExtraction
 Heavily inspired by [mhrice](https://github.com/wwylele/mhrice), this project uses Python to extract data from Monster Hunter Rise (MHR) game files.
 
 mhrice is an awesome project and very instructive in understanding the data structure of MHR files. Unfortunately, I have very limited knowledge in rust (only studied for two weeks for this project), which mhrice is written in, and the scripts themselves have few comments. This motivated me to write my own Python version of MHR data extractor, such that my Python-speaking friends and myself can use it more flexibly. 
