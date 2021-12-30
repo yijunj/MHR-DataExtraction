@@ -185,3 +185,7 @@ WeaponChangeUserDataParam
 WeaponChangeUserData
 WeaponUpdateTreeUserDataParam
 WeaponUpdateTreeUserData
+QuestDataForRewardUserDataParam
+QuestDataForRewardUserData
+RewardIdLotTableUserDataParam
+RewardIdLotTableUserData

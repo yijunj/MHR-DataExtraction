@@ -185,3 +185,7 @@
 1477860049,snow.data.WeaponChangeUserData,WeaponChangeUserData
 237313156,snow.data.WeaponUpdateTreeUserData.Param,WeaponUpdateTreeUserDataParam
 2352227898,snow.data.WeaponUpdateTreeUserData,WeaponUpdateTreeUserData
+41903831,snow.data.QuestDataForRewardUserData.Param,QuestDataForRewardUserDataParam
+1985043341,snow.data.QuestDataForRewardUserData,QuestDataForRewardUserData
+2283818245,snow.data.RewardIdLotTableUserData.Param,RewardIdLotTableUserDataParam
+1537900262,snow.data.RewardIdLotTableUserData,RewardIdLotTableUserData

@@ -185,3 +185,7 @@ snow.data.WeaponChangeUserData.Param
 snow.data.WeaponChangeUserData
 snow.data.WeaponUpdateTreeUserData.Param
 snow.data.WeaponUpdateTreeUserData
+snow.data.QuestDataForRewardUserData.Param
+snow.data.QuestDataForRewardUserData
+snow.data.RewardIdLotTableUserData.Param
+snow.data.RewardIdLotTableUserData
