@@ -236,6 +236,7 @@ class DiscoverEmSetData(OrderedAttibuteClass):
         self.param = ['DiscoverEmSetDataParam']
 
 # These don't exist in MHRice!
+# Quest reward data
 class QuestDataForRewardUserDataParam(OrderedAttibuteClass):
     def __init__(self):
         self.quest_id = 'u32'

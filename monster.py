@@ -39,10 +39,10 @@ class Monster(OrderedAttibuteClass):
 
     def get_data_base(self):
         if self.is_large_monster:
-            filename = 'user\\monster\\em{:03}\\{:02}\\em{:03}_{:02}_database.user.2'\
+            filename = 'game_file_user\\monster\\em{:03}\\{:02}\\em{:03}_{:02}_database.user.2'\
                 .format(self.id, self.sub_id, self.id, self.sub_id)
         else:
-            filename = 'user\\monster\\ems{:03}\\{:02}\\ems{:03}_{:02}_database.user.2'\
+            filename = 'game_file_user\\monster\\ems{:03}\\{:02}\\ems{:03}_{:02}_database.user.2'\
                 .format(self.id, self.sub_id, self.id, self.sub_id)
         if exists(filename):
             self.data_base = user.read_user_file(filename)
@@ -51,10 +51,10 @@ class Monster(OrderedAttibuteClass):
 
     def get_data_tune(self):
         if self.is_large_monster:
-            filename = 'user\\monster\\em{:03}\\{:02}\\em{:03}_{:02}_datatune.user.2'\
+            filename = 'game_file_user\\monster\\em{:03}\\{:02}\\em{:03}_{:02}_datatune.user.2'\
                 .format(self.id, self.sub_id, self.id, self.sub_id)
         else:
-            filename = 'user\\monster\\ems{:03}\\{:02}\\ems{:03}_{:02}_datatune.user.2'\
+            filename = 'game_file_user\\monster\\ems{:03}\\{:02}\\ems{:03}_{:02}_datatune.user.2'\
                 .format(self.id, self.sub_id, self.id, self.sub_id)
         if exists(filename):
             self.data_tune = user.read_user_file(filename)
@@ -63,10 +63,10 @@ class Monster(OrderedAttibuteClass):
 
     def get_meat_data(self):
         if self.is_large_monster:
-            filename = 'user\\monster\\em{:03}\\{:02}\\em{:03}_{:02}_meat_data.user.2'\
+            filename = 'game_file_user\\monster\\em{:03}\\{:02}\\em{:03}_{:02}_meat_data.user.2'\
                 .format(self.id, self.sub_id, self.id, self.sub_id)
         else:
-            filename = 'user\\monster\\ems{:03}\\{:02}\\ems{:03}_{:02}_meat_data.user.2'\
+            filename = 'game_file_user\\monster\\ems{:03}\\{:02}\\ems{:03}_{:02}_meat_data.user.2'\
                 .format(self.id, self.sub_id, self.id, self.sub_id)
         if exists(filename):
             self.meat_data = user.read_user_file(filename)
@@ -75,10 +75,10 @@ class Monster(OrderedAttibuteClass):
 
     def get_condition_damage_data(self):
         if self.is_large_monster:
-            filename = 'user\\monster\\em{:03}\\{:02}\\em{:03}_{:02}_condition_damage_data.user.2'\
+            filename = 'game_file_user\\monster\\em{:03}\\{:02}\\em{:03}_{:02}_condition_damage_data.user.2'\
                 .format(self.id, self.sub_id, self.id, self.sub_id)
         else:
-            filename = 'user\\monster\\ems{:03}\\{:02}\\ems{:03}_{:02}_condition_damage_data.user.2'\
+            filename = 'game_file_user\\monster\\ems{:03}\\{:02}\\ems{:03}_{:02}_condition_damage_data.user.2'\
                 .format(self.id, self.sub_id, self.id, self.sub_id)
         if exists(filename):
             self.condition_damage_data = user.read_user_file(filename)
@@ -87,10 +87,10 @@ class Monster(OrderedAttibuteClass):
 
     def get_anger_data(self):
         if self.is_large_monster:
-            filename = 'user\\monster\\em{:03}\\{:02}\\em{:03}_{:02}_anger_data.user.2'\
+            filename = 'game_file_user\\monster\\em{:03}\\{:02}\\em{:03}_{:02}_anger_data.user.2'\
                 .format(self.id, self.sub_id, self.id, self.sub_id)
         else:
-            filename = 'user\\monster\\ems{:03}\\{:02}\\ems{:03}_{:02}_anger_data.user.2'\
+            filename = 'game_file_user\\monster\\ems{:03}\\{:02}\\ems{:03}_{:02}_anger_data.user.2'\
                 .format(self.id, self.sub_id, self.id, self.sub_id)
         if exists(filename):
             self.anger_data = user.read_user_file(filename)
@@ -99,10 +99,10 @@ class Monster(OrderedAttibuteClass):
 
     def get_parts_break_data(self):
         if self.is_large_monster:
-            filename = 'user\\monster\\em{:03}\\{:02}\\em{:03}_{:02}_parts_break_data.user.2'\
+            filename = 'game_file_user\\monster\\em{:03}\\{:02}\\em{:03}_{:02}_parts_break_data.user.2'\
                 .format(self.id, self.sub_id, self.id, self.sub_id)
         else:
-            filename = 'user\\monster\\ems{:03}\\{:02}\\ems{:03}_{:02}_parts_break_data.user.2'\
+            filename = 'game_file_user\\monster\\ems{:03}\\{:02}\\ems{:03}_{:02}_parts_break_data.user.2'\
                 .format(self.id, self.sub_id, self.id, self.sub_id)
         if exists(filename):
             self.parts_break_data = user.read_user_file(filename)
@@ -111,10 +111,10 @@ class Monster(OrderedAttibuteClass):
 
     def get_parts_map(self):
         if self.is_large_monster:
-            filename = 'rcol\\em{:03}_{:02}_colliders.rcol.18'\
+            filename = 'game_file_rcol\\em{:03}_{:02}_colliders.rcol.18'\
                 .format(self.id, self.sub_id)
         else:
-            filename = 'rcol\\ems{:03}_{:02}_colliders.rcol.18'\
+            filename = 'game_file_rcol\\ems{:03}_{:02}_colliders.rcol.18'\
                 .format(self.id, self.sub_id)
         if exists(filename):
             self.parts_map = rcol.read_rcol_file(filename)
@@ -123,10 +123,10 @@ class Monster(OrderedAttibuteClass):
 
     def get_boss_init_set_data(self):
         if self.is_large_monster:
-            filename = 'user\\monster\\em{:03}\\{:02}\\em{:03}_{:02}_boss_init_set_data.user.2'\
+            filename = 'game_file_user\\monster\\em{:03}\\{:02}\\em{:03}_{:02}_boss_init_set_data.user.2'\
                 .format(self.id, self.sub_id, self.id, self.sub_id)
         else:
-            filename = 'user\\monster\\ems{:03}\\{:02}\\ems{:03}_{:02}_boss_init_set_data.user.2'\
+            filename = 'game_file_user\\monster\\ems{:03}\\{:02}\\ems{:03}_{:02}_boss_init_set_data.user.2'\
                 .format(self.id, self.sub_id, self.id, self.sub_id)
         if exists(filename):
             self.boss_init_set_data = user.read_user_file(filename)
@@ -135,10 +135,10 @@ class Monster(OrderedAttibuteClass):
 
     def get_drop_item(self):
         if self.is_large_monster:
-            filename = 'user\\monster\\em{:03}\\{:02}\\em{:03}_{:02}_drop_item_info_data.user.2'\
+            filename = 'game_file_user\\monster\\em{:03}\\{:02}\\em{:03}_{:02}_drop_item_info_data.user.2'\
                 .format(self.id, self.sub_id, self.id, self.sub_id)
         else:
-            filename = 'user\\monster\\ems{:03}\\{:02}\\ems{:03}_{:02}_drop_item_info_data.user.2'\
+            filename = 'game_file_user\\monster\\ems{:03}\\{:02}\\ems{:03}_{:02}_drop_item_info_data.user.2'\
                 .format(self.id, self.sub_id, self.id, self.sub_id)
         if exists(filename):
             self.drop_item = user.read_user_file(filename)
@@ -147,10 +147,10 @@ class Monster(OrderedAttibuteClass):
 
     def get_parts_break_reward(self):
         if self.is_large_monster:
-            filename = 'user\\monster\\em{:03}\\{:02}\\em{:03}_{:02}_parts_break_reward_data.user.2'\
+            filename = 'game_file_user\\monster\\em{:03}\\{:02}\\em{:03}_{:02}_parts_break_reward_data.user.2'\
                 .format(self.id, self.sub_id, self.id, self.sub_id)
         else:
-            filename = 'user\\monster\\ems{:03}\\{:02}\\ems{:03}_{:02}_parts_break_reward_data.user.2'\
+            filename = 'game_file_user\\monster\\ems{:03}\\{:02}\\ems{:03}_{:02}_parts_break_reward_data.user.2'\
                 .format(self.id, self.sub_id, self.id, self.sub_id)
         if exists(filename):
             self.parts_break_reward = user.read_user_file(filename)
@@ -159,7 +159,7 @@ class Monster(OrderedAttibuteClass):
 
 def read_large_monster_data():
     large_monsters = []
-    with open('user\\large_monster_ids.json', 'r') as f:
+    with open('game_file_user\\large_monster_ids.json', 'r') as f:
         large_monster_ids = json.loads(f.read())
     for key in large_monster_ids.keys():
         id = int(key)
@@ -169,7 +169,7 @@ def read_large_monster_data():
 
 def read_small_monster_data():
     small_monsters = []
-    with open('user\\small_monster_ids.json', 'r') as f:
+    with open('game_file_user\\small_monster_ids.json', 'r') as f:
         small_monster_ids = json.loads(f.read())
     for key in small_monster_ids.keys():
         id = int(key)

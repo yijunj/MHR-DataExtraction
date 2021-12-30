@@ -340,31 +340,31 @@ class WeaponList(OrderedAttibuteClass):
         self.get_explain()
 
     def get_base_data(self):
-        filename = 'user\\weapon\\{}\\{}BaseData.user.2'.format(self.weapon_type, self.weapon_type)
+        filename = 'game_file_user\\weapon\\{}\\{}BaseData.user.2'.format(self.weapon_type, self.weapon_type)
         self.base_data = user.read_user_file(filename)
 
     def get_product(self):
-        filename = 'user\\weapon\\{}\\{}ProductData.user.2'.format(self.weapon_type, self.weapon_type)
+        filename = 'game_file_user\\weapon\\{}\\{}ProductData.user.2'.format(self.weapon_type, self.weapon_type)
         self.product = user.read_user_file(filename)
 
     def get_change(self):
-        filename = 'user\\weapon\\{}\\{}ChangeData.user.2'.format(self.weapon_type, self.weapon_type)
+        filename = 'game_file_user\\weapon\\{}\\{}ChangeData.user.2'.format(self.weapon_type, self.weapon_type)
         self.change = user.read_user_file(filename)
 
     def get_process(self):
-        filename = 'user\\weapon\\{}\\{}ProcessData.user.2'.format(self.weapon_type, self.weapon_type)
+        filename = 'game_file_user\\weapon\\{}\\{}ProcessData.user.2'.format(self.weapon_type, self.weapon_type)
         self.process = user.read_user_file(filename)
 
     def get_tree(self):
-        filename = 'user\\weapon\\{}\\{}UpdateTreeData.user.2'.format(self.weapon_type, self.weapon_type)
+        filename = 'game_file_user\\weapon\\{}\\{}UpdateTreeData.user.2'.format(self.weapon_type, self.weapon_type)
         self.tree = user.read_user_file(filename)
 
     def get_name(self):
-        filename = 'msg\\{}_Name.msg.17'.format(self.weapon_type)
+        filename = 'game_file_msg\\{}_Name.msg.17'.format(self.weapon_type)
         self.name = msg.read_msg_file(filename)
 
     def get_explain(self):
-        filename = 'msg\\{}_Explain.msg.17'.format(self.weapon_type)
+        filename = 'game_file_msg\\{}_Explain.msg.17'.format(self.weapon_type)
         self.explain = msg.read_msg_file(filename)
 
 if __name__ == '__main__':
