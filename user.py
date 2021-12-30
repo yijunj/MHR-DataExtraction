@@ -1,10 +1,11 @@
 from bitstring import BitStream
-import json
+import utils
 from utils import RSZ_TYPE_MAP
 
 from alchemy import *
 from armor import *
 from boss import *
+from collision import *
 from condition_damage_preset import *
 from item import *
 from lot import *
@@ -23,58 +24,6 @@ from weapon import *
 # This script is about reading user data files
 # Basically, it reads a certain number of bits, assigns it to the current class attribute, then repeat
 
-def print_hex(data):
-    print('{:0>4X}'.format(data))
-
-def print_object(ordered_attribute_object, deliminator='\n'):
-    print(list(ordered_attribute_object.items()), end=deliminator)
-
-def print_first_few_params(object, n, deliminator='\n'):
-    if len(object.keys()) == 1:
-        print('Print the first few params', end=deliminator)
-        sub_object_list = list(object.items())[0][1]
-        for i in range(min(n, len(sub_object_list))):
-            print_object(sub_object_list[i], deliminator)
-    else:
-        raise Exception('Object has more than one attributes') # Should use print_hierarchical_object instead
-
-def print_last_few_params(object, n, deliminator='\n'):
-    if len(object.keys()) == 1:
-        print('Print the last few params', end=deliminator)
-        sub_object_list = list(object.items())[0][1]
-        for i in reversed(range(min(n, len(sub_object_list)))):
-            print_object(sub_object_list[-i-1], deliminator)
-    else:
-        raise Exception('Object has more than one attributes') # Should use print_hierarchical_object instead
-
-# This prints a nested object (object has one ore more attributes that is/are other object(s)), unpacked
-def print_hierarchical_object(object, deliminator='\n'):
-    for key in object.keys():
-        attribute = getattr(object, key)
-        if type(attribute) == list:
-            if len(attribute) == 0 or type(attribute[0]) == int or type(attribute[0]) == float or\
-            type(attribute[0]) == str or type(attribute[0]) == bool or attribute[0] is None:
-                print((key, attribute), end=', ')
-            else:
-                print(key, end=': ')
-                for sub_object in attribute:
-                    print('{', end='')
-                    print_hierarchical_object(sub_object, deliminator)
-        else:
-            if type(attribute) == int or type(attribute) == float or\
-            type(attribute) == str or type(attribute) == bool or attribute is None:
-                print((key, attribute), end=', ')
-            else:
-                print(key, end=': {')
-                print_hierarchical_object(attribute, deliminator)
-    print('},', end=deliminator)
-
-# Move cursor (pad) to the next multiple of given number of bits
-def pad_to_multiple_of(bit_num, data):
-    while data.pos % bit_num != 0:
-        data.pos += 1
-    return data
-
 # Reads meta data of a user data file
 def read_usr_head(data):
     magic = data.read('uintle:32')
@@ -84,7 +33,7 @@ def read_usr_head(data):
     child_count = data.read('uintle:32')
     padding = data.read('uintle:32')
     if padding != 0:
-        raise Exception('padding should be zero')
+        raise Exception('Padding should be zero')
     resource_list_offset = data.read('uintle:64')
     child_list_offset = data.read('uintle:64')
     rsz_offset = data.read('uintle:64')
@@ -108,7 +57,7 @@ def read_rsz_head(data):
     string_count = data.read('uintle:32')
     padding = data.read('uintle:32')
     if padding != 0:
-        raise Exception('padding should be zero')
+        raise Exception('Padding should be zero')
     type_descriptor_offset = data.read('uintle:64')
     data_offset = data.read('uintle:64')
     string_table_offset = data.read('uintle:64')
@@ -151,11 +100,11 @@ def read_rsz_chunk(data_type, data):
             # In this case, the initialization of this attibute has the number of bits as the second list entry
             # This number is represented here as length_bit_num
             if attribute[0] == 'string': # List of strings
-                data = pad_to_multiple_of(32, data)
+                data = utils.pad_to_multiple_of(32, data)
                 length = data.read('uintle:32')
                 temp_list = []
                 for i in range(length):
-                    data = pad_to_multiple_of(32, data)
+                    data = utils.pad_to_multiple_of(32, data)
                     char_num = data.read('uintle:32')
                     string = ''
                     for j in range(char_num):
@@ -169,7 +118,7 @@ def read_rsz_chunk(data_type, data):
                     length_bit_num = 32
                 else:
                     length_bit_num = int(attribute[1][1:])
-                data = pad_to_multiple_of(32, data) # List always starts at a fresh chunk of 4
+                data = utils.pad_to_multiple_of(32, data) # List always starts at a fresh chunk of 4
                 length = data.read('uintle:' + str(length_bit_num)) # This is the length of the list
                 format = attribute[0][1:].split(',')
                 bit_num = int(format[0]) # This is the length of each entry in bits
@@ -182,12 +131,12 @@ def read_rsz_chunk(data_type, data):
                 # Need to move the cursor to the correct position
                 # Because after the parent node takes its children, the game file performs a count
                 # Jump over the data number counts and move the cursor to the next data chunk
-                data = pad_to_multiple_of(32, data)
+                data = utils.pad_to_multiple_of(32, data)
                 length = data.read('uintle:32')
                 data.pos += length * 32
         else:
             if attribute == 'string': # String data
-                data = pad_to_multiple_of(32, data)
+                data = utils.pad_to_multiple_of(32, data)
                 char_num = data.read('uintle:32')
                 string = ''
                 for j in range(char_num):
@@ -198,23 +147,23 @@ def read_rsz_chunk(data_type, data):
             elif attribute.startswith('u'): # Integer data
                 format = attribute[1:].split(',')
                 bit_num = int(format[0])
-                data = pad_to_multiple_of(bit_num, data)
+                data = utils.pad_to_multiple_of(bit_num, data)
                 setattr(object, key, data.read('uintle:' + str(bit_num)))
             elif attribute.startswith('p'): # Pad until multiple of n-bit
                 bit_num = int(attribute[1:])
-                data = pad_to_multiple_of(bit_num, data)
+                data = utils.pad_to_multiple_of(bit_num, data)
             else:
                 # This attribute eats
                 # Need to move the cursor to the correct position
                 # Because after the parent node takes its children, the game file performs a count
                 # Jump over the data number counts and move the cursor to the next data chunk
-                data = pad_to_multiple_of(32, data)
+                data = utils.pad_to_multiple_of(32, data)
                 data.pos += 32
 
-    # print_object(object)
+    # utils.print_object(object)
     object.human_readable()
     # print(data.pos)
-    # print_object(object)
+    # utils.print_object(object)
     return object, data
 
 # Analyze the data type list, figure out the hierarchy between data types
@@ -270,25 +219,26 @@ def read_rsz(data_type_list, data):
             if key not in key_can_eat_list: # This key does not eat data, then assign value
                 setattr(object, key, getattr(temp_object, key))
         object.clean_up()
-        # print_hierarchical_object(object)
+        # utils.print_hierarchical_object(object)
         data_stack.append(object)
-    if len(data_stack) != 1:
-        raise Exception('Stack should only have the root left in the end')
-    return data_stack[0], data
+
+    return data_stack, data
 
 # Combines everything together
 def read_user_file(filename):
     data = BitStream(filename = filename)
     data = read_usr_head(data)
     data_type_list, data = read_rsz_head(data)
-    object, _ = read_rsz(data_type_list, data)
-    return object
+    data_stack, _ = read_rsz(data_type_list, data)
+    if len(data_stack) != 1:
+        raise Exception('Stack should only have the root left in the end')
+    return data_stack[0]
 
 if __name__ == '__main__':
     # weapon_type = 'GreatSword'
     # filename = 'user\\weapon\\{}\\{}BaseData.user.2'.format(weapon_type, weapon_type)
     filename = 'user\\lot\\PartsTypeTextData.user.2'
     object = read_user_file(filename)
-    # print_first_few_params(object, 1000, deliminator='\n\n')
-    # print_last_few_params(object, 3, deliminator='\n\n')
-    print_hierarchical_object(object)
+    # utils.print_first_few_params(object, 1000, deliminator='\n\n')
+    # utils.print_last_few_params(object, 3, deliminator='\n\n')
+    utils.print_hierarchical_object(object)

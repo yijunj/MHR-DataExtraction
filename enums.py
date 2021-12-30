@@ -90,7 +90,9 @@ def enum_BaseHitMarkType(type_id):
 ########################################
 # These are listed in MHRice common.rs
 def bytes_Guid(text_bytes, bit_num):
-    return [int(hex(text_bytes)[2*i+2:2*i+4], 16) for i in reversed(range(int(bit_num/8)))]
+    byte_num = int(bit_num / 8)
+    hex_bytes = hex(text_bytes)[2:].zfill(2*byte_num)
+    return [int(hex_bytes[2*i:2*i+2], 16) for i in reversed(range(byte_num))]
 
 ########################################
 # These are listed in MHRice condition_damage_data.rs
@@ -161,9 +163,9 @@ def enum_ItemId(item_id):
     elif item_id == 0x04000000:
         return None
     elif item_id & 0xFFFF0000 == 0x04100000:
-        return 'Normal({})'.format(item_id & 0x0000FFFF)
+        return 'Normal({})'.format(item_id & 0x0000FFFF) # Normal items
     else:
-        return 'Ec({})'.format(item_id & 0x0000FFFF)
+        return 'Ec({})'.format(item_id & 0x0000FFFF) # Environmental creatures
 
 def newtype_RareTypes(type):
     return type + 1

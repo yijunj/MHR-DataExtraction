@@ -1,6 +1,19 @@
 from collections import OrderedDict
 import struct
 import json
+import os
+
+cwd = 'M:\\MHR game data extraction\\Extract data with Python'
+
+# Loads hash map from file: a dictionary from u32 keys to data type strings
+# These strings are exactly names of the classes defined in each Python module
+def hash_map():
+    with open(os.path.join(cwd, 'hash\\data_type_dict.json'), 'r') as f:
+        data_type_dict = json.load(f)
+    return data_type_dict
+
+RSZ_TYPE_MAP = hash_map()
+VERSION = 12
 
 # Class template that is inherited by many classes
 # Features in ordered attributes
@@ -23,8 +36,14 @@ class OrderedAttibuteClass(object):
     def keys(self):
         return self.__odict__.keys()
 
+    def values(self):
+        return self.__odict__.values()
+
     def items(self):
         return self.__odict__.items()
+
+    def to_json(self):
+        return json.dumps(self.__odict__, ensure_ascii=False)
 
     def versioned(self, attribute, vmin, vmax):
         if VERSION >= vmin and VERSION <= vmax:
@@ -53,11 +72,14 @@ class OrderedAttibuteClass(object):
 
     def clean_up(self):
         dummy_key_list = []
-        for item in self.items():
-            if item[1] == 'p128' or item[1] == 'p64' or item[1] == 'p32' or item[1] == 'p16':
-                dummy_key_list.append(item[0])
+        for key, value in self.items():
+            if value == 'p128' or value == 'p64' or value == 'p32' or value == 'p16':
+                dummy_key_list.append(key)
         for key in dummy_key_list:
-            delattr(self, key)
+            delattr(self, key) # Delete attributes used for padding
+        for value in self.values():
+            if type(value) == list and len(value) == 1 and value[0] in RSZ_TYPE_MAP.values():
+                value.pop() # Get rid of the initialization string
 
     # human_readable() method is called after the object has all its data populated
     # This method casts the data into the correct types
@@ -65,6 +87,8 @@ class OrderedAttibuteClass(object):
     def human_readable(self):
         pass
 
+########################################
+# General casting methods
 # Casts hex (represented as string) into float
 def hex_to_f32(hex):
     if hex == '0':
@@ -83,6 +107,13 @@ def u32_to_i32(u32):
     else:
         return u32
 
+# Casts signed int to unsigned int
+def i32_to_u32(i32):
+    if i32 < 0:
+        return i32 + (0xFFFFFFFF + 1)
+    else:
+        return i32
+
 # Casts unsigned 8-bit int to signed int
 def u8_to_i8(u8):
     if u8 > 0x7F:
@@ -90,12 +121,80 @@ def u8_to_i8(u8):
     else:
         return u8
 
-# Loads hash map from file: a dictionary from u32 keys to data type strings
-# These strings are exactly names of the classes defined in each Python module
-def hash_map():
-    with open('hash/data_type_dict.json', 'r') as f:
-        data_type_dict = json.load(f)
-    return data_type_dict
+########################################
+# General char/string manipulating methods
+def u8_list_to_u16_str(u8_list):
+    s = [chr(u8_list[i] + (u8_list[i+1] << 8)) for i in range(len(u8_list)) if i % 2 == 0]
+    return ''.join(s)
 
-RSZ_TYPE_MAP = hash_map()
-VERSION = 12
+def read_str_until_x00(string):
+    s = []
+    for char in string:
+        if ord(char) == 0:
+            break
+        s.append(char)
+    return ''.join(s)
+
+def str_to_u16_hashable(string):
+    hash_s = []
+    for char in string:
+        hash_s.append(char)
+        if ord(char) <= 0xFF:
+            hash_s.append('\x00')
+    return ''.join(hash_s)
+
+########################################
+# General BitStream manipulating methods
+# Move cursor (pad) to the next multiple of given number of bits
+def pad_to_multiple_of(bit_num, data):
+    while data.pos % bit_num != 0:
+        data.pos += 1
+    return data
+
+########################################
+# General printing methods
+def print_hex(data):
+    print('{:0>4X}'.format(data))
+
+def print_object(ordered_attribute_object, deliminator='\n'):
+    print(list(ordered_attribute_object.items()), end=deliminator)
+
+def print_first_few_params(object, n, deliminator='\n'):
+    if len(object.keys()) == 1:
+        print('Print the first few params', end=deliminator)
+        sub_object_list = list(object.items())[0][1]
+        for i in range(min(n, len(sub_object_list))):
+            print_object(sub_object_list[i], deliminator)
+    else:
+        raise Exception('Object has more than one attributes') # Should use print_hierarchical_object instead
+
+def print_last_few_params(object, n, deliminator='\n'):
+    if len(object.keys()) == 1:
+        print('Print the last few params', end=deliminator)
+        sub_object_list = list(object.items())[0][1]
+        for i in reversed(range(min(n, len(sub_object_list)))):
+            print_object(sub_object_list[-i-1], deliminator)
+    else:
+        raise Exception('Object has more than one attributes') # Should use print_hierarchical_object instead
+
+# This prints a nested object (object has one ore more attributes that is/are other object(s)), unpacked
+def print_hierarchical_object(object, deliminator='\n'):
+    for key in object.keys():
+        attribute = getattr(object, key)
+        if type(attribute) == list:
+            if len(attribute) == 0 or type(attribute[0]) == int or type(attribute[0]) == float or\
+            type(attribute[0]) == str or type(attribute[0]) == bool or attribute[0] is None:
+                print((key, attribute), end=', ')
+            else:
+                print(key, end=': ')
+                for sub_object in attribute:
+                    print('{', end='')
+                    print_hierarchical_object(sub_object, deliminator)
+        else:
+            if type(attribute) == int or type(attribute) == float or\
+            type(attribute) == str or type(attribute) == bool or attribute is None:
+                print((key, attribute), end=', ')
+            else:
+                print(key, end=': {')
+                print_hierarchical_object(attribute, deliminator)
+    print('},', end=deliminator)

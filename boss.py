@@ -25,6 +25,10 @@ class PartData(OrderedAttibuteClass):
 class BitSetFlagHabitatType(OrderedAttibuteClass):
     def __init__(self):
         self.flag = ['u32']
+    def human_readable(self):
+        if len(self.flag) == 1 and type(self.flag[0]) == 'int':
+            self.flag = bin(self.flag[0])[2:]
+            self.flag = [int(p)+1 for p, c in enumerate(self.flag) if c == '1']
 
 class BossMonsterData(OrderedAttibuteClass):
     def __init__(self):
@@ -32,7 +36,7 @@ class BossMonsterData(OrderedAttibuteClass):
         self.family_type = 'u32'
         self.habitat_area = 'BitSetFlagHabitatType'
         self.is_limit_open_lv = 'u8'
-        self.part_Table_data = ['PartData']
+        self.part_table_data = ['PartData']
     def human_readable(self):
         self.em_type = enum_EmTypes(self.em_type)
         self.family_type = utils.u32_to_i32(self.family_type)

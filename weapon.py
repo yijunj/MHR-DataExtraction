@@ -1,8 +1,9 @@
-import utils
 from bitstring import BitStream
 from utils import OrderedAttibuteClass
 from enums import *
 import user
+import msg
+import utils
 
 # This correspondes to MHRice weapon.rs
 # Classes for weapon data
@@ -335,6 +336,8 @@ class WeaponList(OrderedAttibuteClass):
         self.get_change()
         self.get_process()
         self.get_tree()
+        self.get_name()
+        self.get_explain()
 
     def get_base_data(self):
         filename = 'user\\weapon\\{}\\{}BaseData.user.2'.format(self.weapon_type, self.weapon_type)
@@ -356,9 +359,17 @@ class WeaponList(OrderedAttibuteClass):
         filename = 'user\\weapon\\{}\\{}UpdateTreeData.user.2'.format(self.weapon_type, self.weapon_type)
         self.tree = user.read_user_file(filename)
 
+    def get_name(self):
+        filename = 'msg\\{}_Name.msg.17'.format(self.weapon_type)
+        self.name = msg.read_msg_file(filename)
+
+    def get_explain(self):
+        filename = 'msg\\{}_Explain.msg.17'.format(self.weapon_type)
+        self.explain = msg.read_msg_file(filename)
+
 if __name__ == '__main__':
     weapon_type_list = ['GreatSword', 'ShortSword', 'Hammer', 'Lance', 'LongSword', 'SlashAxe', 'GunLance',\
                         'DualBlades', 'Horn', 'InsectGlaive', 'ChargeAxe', 'LightBowgun', 'HeavyBowgun', 'Bow']
     weapon_type = weapon_type_list[0]
     weapon = WeaponList(weapon_type)
-    user.print_hierarchical_object(weapon)
+    utils.print_hierarchical_object(weapon)

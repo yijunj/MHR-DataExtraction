@@ -234,3 +234,44 @@ class DiscoverEmSetDataParam(SharedEnemyParam):
 class DiscoverEmSetData(OrderedAttibuteClass):
     def __init__(self):
         self.param = ['DiscoverEmSetDataParam']
+
+# These don't exist in MHRice!
+class QuestDataForRewardUserDataParam(OrderedAttibuteClass):
+    def __init__(self):
+        self.quest_id = 'u32'
+        self.dummy1 = 'u32'
+        self.dummy2 = 'u32'
+        self.dummy3 = 'u32'
+        self.reward_tbl = 'u32'
+        self.dummy4 = ['u32']
+        self.dummy5 = 'u32'
+    def clean_up(self):
+        super().clean_up()
+        # Don't know what these dummy values are for yet
+        delattr(self, 'dummy1')
+        delattr(self, 'dummy2')
+        delattr(self, 'dummy3')
+        delattr(self, 'dummy4')
+        delattr(self, 'dummy5')
+
+class QuestDataForRewardUserData(OrderedAttibuteClass):
+    def __init__(self):
+        self.param = ['QuestDataForRewardUserDataParam']
+
+class RewardIdLotTableUserDataParam(OrderedAttibuteClass):
+    def __init__(self):
+        self.reward_tbl = 'u32'
+        self.dummy = 'u32'
+        self.reward_item_id_list = ['u32']
+        self.reward_num_list = ['u32']
+        self.reward_prob_list = ['u32']
+    def human_readable(self):
+        self.reward_item_id_list = [enum_ItemId(i) for i in self.reward_item_id_list]
+    def clean_up(self):
+        super().clean_up()
+        # Don't know what this dummy value is for yet
+        delattr(self, 'dummy')
+
+class RewardIdLotTableUserData(OrderedAttibuteClass):
+    def __init__(self):
+        self.param = ['RewardIdLotTableUserDataParam']
