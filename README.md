@@ -27,4 +27,4 @@ All data are stored as binary files. The general file structure is magic (like "
 mhrice creates rust structs for different data types, while here I use Python classes. Each class has attributes in the exact same order as they appear in the data file, so the .user file reader knows which piece of data it's looking at. Moreover, the .user file reader needs to know how many bits each attribute takes up, which can be different depending on the type (int, float, bool, etc.). There are some observed rules about bit count and padding, which are handled generally in the code.
 
 ## How to run
-The relevant game files are stored under the folders Just run python pedia.py. The 
+The relevant game files are supposed to be stored under folders named with the prefix "game_file". Inside such a folder, you need to run the copy file script to copy the game files from their original location. After you have these folders populated with game files, just run python pedia.py from the root directory. This will create a pickle file in parse_pedia folder, where it gets further parsed by the parsing scripts.
