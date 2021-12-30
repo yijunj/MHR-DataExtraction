@@ -1,0 +1,159 @@
+﻿Original,Translated
+上半身,上半身,上半身,Upper body
+Group0_全身,全身,全身,Body
+ダメージアタリ_体_部位,全身,全身,Body
+体全体,全身,全身,Body
+全身,全身,全身,Body
+全身（部位）,全身,全身,Body
+全身_痩せ,全身（痩せ）,全身（瘦）,Body (thin)
+全身_デブ,全身（デブ）,全身（胖）,Body (fat)
+Group2_前脚,前脚,前腿,Front leg
+ダメージ部位02　前脚,前脚,前腿,Front leg
+ダメージ部位04　左右前脚,前脚,前腿,Front leg
+前脚,前脚,前腿,Front leg
+Group8_前脚_泥,前脚（泥）,前腿（泥）,Front leg (mud)
+右氷塊,右氷塊,右冰块,Right ice block
+ダメージ部位06　右刃翼,右刃翼,右刃翼,Right wing blade
+右側前後脚,右前、右後脚,右前、右后腿,Right front/hind leg
+EmHitDamageRSData(3),右前脚,右前腿,Right front leg
+Group3_右前脚,右前脚,右前腿,Right front leg
+右前脚,右前脚,右前腿,Right front leg
+部位03：右前脚,右前脚,右前腿,Right front leg
+右前脚（糸）,右前脚（糸）,右前腿（丝）,Right front leg (silk)
+EmHitDamageRSData(5),右後脚,右后腿,Right hind leg
+Group5_右後脚,右後脚,右后腿,Right hind leg
+ダメージ部位05　右後脚,右後脚,右后腿,Right hind leg
+ダメージ部位07　右後脚,右後脚,右后腿,Right hind leg
+右後脚,右後脚,右后腿,Right hind leg
+部位05：右後脚,右後脚,右后腿,Right hind leg
+右後脚（糸）,右後脚（糸）,右后腿（丝）,Right hind leg (silk)
+Group4_右手,右手,右臂,Right arm
+右手,右手,右臂,Right arm
+右翼腕,右翼腕,右臂,Right arm
+Group6_右翼,右翼,右翼,Right wing
+ダメージアタリ　右翼,右翼,右翼,Right wing
+ダメージ部位03　右翼,右翼,右翼,Right wing
+右翼,右翼,右翼,Right wing
+部位03：右翼,右翼,右翼,Right wing
+Group3_右脚,右脚,右腿,Right leg
+Group4_右脚,右脚,右腿,Right leg
+Group6_右脚,右脚,右腿,Right leg
+右脚,右脚,右腿,Right leg
+Group10_右脚_泥,右脚（泥）,右腿（泥）,Right leg (mud)
+泥・右脚,右脚（泥）,右腿（泥）,Right leg (mud)
+右腕,右腕,右腕,Right wrist
+ダメージ部位03　後脚,後脚,后腿,Hind legs
+後ろ足,後脚,后腿,Hind legs
+後脚,後脚,后腿,Hind legs
+EmHitDamageRSData,頭,头部,Head
+Group0_頭,頭,头部,Head
+Group0_頭部,頭,头部,Head
+Group1_頭,頭,头部,Head
+ダメージアタリ　頭,頭,头部,Head
+ダメージアタリ_頭_部位,頭,头部,Head
+ダメージ部位00　頭,頭,头部,Head
+部位00：頭部,頭,头部,Head
+頭,頭,头部,Head
+頭部,頭,头部,Head
+Group6_頭部_泥,頭（泥）,头部（泥）,Head (mud)
+泥・頭部,頭（泥）,头部（泥）,Head (mud)
+部位00：頭・嘴・傘,頭、嘴、傘,头部、嘴、伞,Head/mouth/umbrella
+部位00_頭～首,頭、首,头部、颈部,Head/neck
+スポンジ,スポンジ,头部海绵,Head sponge
+EmHitDamageRSData(7),尻尾,尾巴,Tail
+Group4_尻尾,尻尾,尾巴,Tail
+Group5_尻尾,尻尾,尾巴,Tail
+Group6_尻尾,尻尾,尾巴,Tail
+Group7_尻尾,尻尾,尾巴,Tail
+ダメージアタリ　尻尾,尻尾,尾巴,Tail
+ダメージアタリ_尻尾_部位,尻尾,尾巴,Tail
+ダメージ部位03　尻尾,尻尾,尾巴,Tail
+ダメージ部位05　尻尾,尻尾,尾巴,Tail
+ダメージ部位06　尻尾,尻尾,尾巴,Tail
+尻尾,尻尾,尾巴,Tail
+部位01_尻尾,尻尾,尾巴,Tail
+部位05：尻尾,尻尾,尾巴,Tail
+部位06：尻尾,尻尾,尾巴,Tail
+Group11_尻尾_泥,尻尾（泥）,尾巴（泥）,Tail (mud)
+泥・尻尾,尻尾（泥）,尾巴（泥）,Tail (mud)
+尻尾浮袋,尻尾浮袋,尾巴浮袋,Tail floating bag
+尻,尻,屁股,Butt
+岩,岩,岩石,Rock
+左氷塊,左氷塊,左冰块,Left ice block
+ダメージ部位02　左刃翼,左刃翼,左刃翼,Left wing blade
+左側前後脚,左前、左後脚,左前、左后腿,Left front/hind leg
+EmHitDamageRSData(2),左前脚,左前腿,Left leg
+Group2_左前脚,左前脚,左前腿,Left leg
+左前脚,左前脚,左前腿,Left leg
+部位02：左前脚,左前脚,左前腿,Left leg
+左前脚（糸）,左前脚（糸）,左前腿（丝）,Left leg (silk)
+EmHitDamageRSData(4),左後脚,左后腿,Left hind leg
+Group4_左後脚,左後脚,左后腿,Left hind leg
+ダメージ部位04　左後脚,左後脚,左后腿,Left hind leg
+ダメージ部位05　左後脚,左後脚,左后腿,Left hind leg
+左後脚,左後脚,左后腿,Left hind leg
+部位04：左後脚,左後脚,左后腿,Left hind leg
+左後脚（糸）,左後脚（糸）,左后腿（丝）,Left hind leg (silk)
+Group3_左手,左手,左臂,Left arm
+左手,左手,左臂,Left arm
+左翼腕,左翼腕,左臂,Left arm
+Group5_左翼,左翼,左翼,Left wing
+ダメージアタリ　左翼,左翼,左翼,Left wing
+ダメージ部位02　左翼,左翼,左翼,Left wing
+左翼,左翼,左翼,Left wing
+部位02：左翼,左翼,左翼,Left wing
+Group2_左脚,左脚,左腿,Left leg
+Group3_左脚,左脚,左腿,Left leg
+Group5_左脚,左脚,左腿,Left leg
+左脚,左脚,左腿,Left leg
+Group9_左脚_泥,左脚（泥）,左腿（泥）,Left leg (mud)
+泥・左脚,左脚（泥）,左腿（泥）,Left leg (mud)
+左腕,左腕,左腕,Left wrist
+泥団子,泥団子,泥团,Mud blob
+泥袋,泥袋,泥袋,Mud bag
+転がり中,転がり中,滚动中,Rolling
+爪,爪,爪,Claw
+甲羅,甲羅,甲壳,Shell
+Group7_翼,翼,翼,Wings
+ダメージ部位04　翼,翼,翼,Wings
+翼,翼,翼,Wings
+部位02_翼,翼,翼,Wings
+背中,背中,背部,Back
+背中上部,背中上部,背的上部,Upper back
+背中下部,背中下部,背的下部,Lower back
+背中浮袋,背中浮袋,背部浮袋,Back floating bag
+背中雷袋,背中雷袋,背部雷袋,Back thunder bag
+EmHitDamageRSData(8),背びれ,背鳍,Back fin
+胸,胸,胸部,Chest
+胸部,胸,胸部,Chest
+胸浮袋,胸浮袋,胸部浮袋,Chest floating bag
+胸雷袋,胸雷袋,胸部雷袋,Chest thunder bag
+ダメージアタリ　両脚,脚,腿,Legs
+部位06：脚,脚,腿,Legs
+脚ヒレ,脚ヒレ,腿蹼,Foot fins
+Group1_腹,腹,腹部,Abdomen
+腹部,腹,腹部,Abdomen
+腹部（繭化状態）,腹（繭化）,腹部（茧化）,Abdomen (cacoon)
+腹・後脚,腹、後脚,腹部、后腿,Abdomen/hind legs
+腹部・後脚,腹、後脚,腹部、后腿,Abdomen/hind legs
+お腹発電器官,お腹発電器官,腹部发电器官,Abdomen thunder organ
+角,角,角,Horn
+身体,胴,躯干,Torso
+EmHitDamageRSData(6),胴,躯干,Torso
+Group0_胴,胴,躯干,Torso
+Group1_胴,胴,躯干,Torso
+Group1_胴体,胴,躯干,Torso
+ダメージアタリ　胴,胴,躯干,Torso
+ダメージアタリ_胴_部位,胴,躯干,Torso
+ダメージ部位01　胴,胴,躯干,Torso
+体,胴,躯干,Torso
+胴,胴,躯干,Torso
+胴体,胴,躯干,Torso
+胴部,胴,躯干,Torso
+部位01：胴体,胴,躯干,Torso
+部位04：胴体,胴,躯干,Torso
+Group7_胴_泥,胴（泥）,躯干（泥）,Torso (mud)
+泥・胴部,胴（泥）,躯干（泥）,Torso (mud)
+Group2_首,首,颈部,Neck
+部位01：首,首,颈部,Neck
+首,首,颈部,Neck

@@ -1,0 +1,44 @@
+﻿Key,Translated
+Normal1,LV1通常弹,Normal Ammo 1,LV1通常弾
+Normal2,LV2通常弹,Normal Ammo 2,LV2通常弾
+Normal3,LV3通常弹,Normal Ammo 3,LV3通常弾
+Kantsu1,LV1贯穿弹,Pierce Ammo 1,LV1貫通弾
+Kantsu2,LV2贯穿弹,Pierce Ammo 2,LV2貫通弾
+Kantsu3,LV3贯穿弹,Pierce Ammo 3,LV3貫通弾
+SanW1,LV1散弹,Spread Ammo 1,LV1散弾
+SanW2,LV2散弹,Spread Ammo 2,LV2散弾
+SanW3,LV3散弹,Spread Ammo 3,LV3散弾
+SanO1,LV1放散弹,Shrapnel Ammo 1,LV1放散弾
+SanO2,LV2放散弹,Shrapnel Ammo 2,LV2放散弾
+SanO3,LV3放散弹,Shrapnel Ammo 3,LV3放散弾
+Tekko1,LV1穿甲榴弹,Sticky Ammo 1,LV1徹甲榴弾
+Tekko2,LV2穿甲榴弹,Sticky Ammo 2,LV2徹甲榴弾
+Tekko3,LV3穿甲榴弹,Sticky Ammo 3,LV3徹甲榴弾
+Cluster1,LV1扩散弹,Cluster Bomb 1,LV1拡散弾
+Cluster2,LV2扩散弹,Cluster Bomb 2,LV2拡散弾
+Cluster3,LV3扩散弹,Cluster Bomb 3,LV3拡散弾
+Poison1,LV1毒弹,Poison Ammo 1,LV1毒弾
+Poison2,LV2毒弹,Poison Ammo 2,LV2毒弾
+Paralysis1,LV1麻痹弹,Paralysis Ammo 1,LV1麻痺弾
+Paralysis2,LV2麻痹弹,Paralysis Ammo 2,LV2麻痺弾
+Sleep1,LV1睡眠弹,Sleep Ammo 1,LV1睡眠弾
+Sleep2,LV2睡眠弹,Sleep Ammo 2,LV2睡眠弾
+Genki1,LV1减气弹,Exhaust Ammo 1,LV1減気弾
+Genki2,LV2减气弹,Exhaust Ammo 2,LV2減気弾
+Heal1,LV1回复弹,Recover Ammo 1,LV1回復弾
+Heal2,LV2回复弹,Recover Ammo 2,LV2回復弾
+Demon,鬼人弹,Demon Ammo,鬼人弾
+Armor,硬化弹,Armor Ammo,硬化弾
+Fire,火炎弹,Flaming Ammo,火炎弾
+FireKantsu,贯穿火炎弹,Piercing Fire Ammo,貫通火炎弾
+Water,水冷弹,Water Ammo,水冷弾
+WaterKantsu,贯穿水冷弹,Piercing Water Ammo,貫通水冷弾
+Ice,冰结弹,Freeze Ammo,氷結弾
+IceKantsu,贯穿冰结弹,Piercing Ice Ammo,貫通氷結弾
+Thunder,电击弹,Thunder Ammo,電撃弾
+ThunderKantsu,贯穿电击弹,Piercing Thunder Ammo,貫通電撃弾
+Dragon,灭龙弹,Dragon Ammo,滅龍弾
+DragonKantsu,贯穿灭龙弹,Piercing Dragon Ammo,貫通滅龍弾
+Zanretsu,斩裂弹,Slicing Ammo,斬裂弾
+Wyvern,龙击弹,Wyvern Ammo,竜撃弾
+Tranq,捕获用麻醉弹,Tranq Ammo,捕獲用麻酔弾
