@@ -157,7 +157,7 @@ class Pedia(OrderedAttibuteClass):
 if __name__ == '__main__':
     pedia = Pedia()
     pedia.collect_data()
-    with open('pedia.pickle', 'wb') as f:
+    with open('parse_pedia/pedia.pickle', 'wb') as f:
         pickle.dump(pedia, f)
     print('Pedia saved as pickle file')
     # utils.print_hierarchical_object(pedia)
