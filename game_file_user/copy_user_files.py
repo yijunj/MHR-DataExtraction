@@ -24,8 +24,8 @@ for key in user_file_dict.keys():
 
 # Copy large monster user files
 large_monster_ids = {}
-data_type_list = ['database', 'datatune', 'meat_data', 'condition_damage_data',\
-                'anger_data', 'parts_break_data', 'boss_init_set_data', 'drop_item_info_data']
+data_type_list = ['database', 'datatune', 'meat_data', 'condition_damage_data', 'anger_data', 'parts_break_data',\
+                'boss_init_set_data', 'drop_item_info_data', 'parts_break_reward_data']
 for id in range(1000):
     for sub_id in range(10):
         pfb_path = os.path.join(pak_dir,\
