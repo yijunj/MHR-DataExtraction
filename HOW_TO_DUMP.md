@@ -14,7 +14,7 @@ When a new version of Atmosphere releases, you can update Atmosphere by followin
 * Download `fusee.bin` from Atmosphere GitHub and put it under SD card `sd:/bootloader/payloads` directory, and then add this to `sd:/bootloader/hekate_ipl.ini`
 ```
 [Payload Fusee]
-fss0=bootloader/payloads/fusee.bin
+fss0=atmosphere/package3
 ```
 
 ### Hekate
