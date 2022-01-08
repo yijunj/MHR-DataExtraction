@@ -29,7 +29,7 @@ When a new version of Hekate releases, you can update by following these steps:
 Make sure `prod.keys` and `title.keys` are under an SD card directory `switch`. If you don't have the keys, you can dump them first by launching `Lockpick_RCM.bin` from Hekate, which can be downloaded [here](https://github.com/shchmue/Lockpick_RCM/releases). Put it under `sd:/bootloader/payloads` and it is launchable in Hekate just like Atmosphere (see below).
 
 ## Booting into RCM and launching Hekate
-* With Switch turned off, ground pin #10 on the right joy-con slot. Connect Switch to PC through USB, open `TegraRcmGUI.exe` on PC. The Switch icon should be red saying "NO RCM".
+* With Switch turned off, insert the just prepared SD card. Ground pin #10 on the right joy-con slot. Connect Switch to PC through USB, open `TegraRcmGUI.exe` on PC. The Switch icon should be red saying "NO RCM".
 * Press volume up button and power button on Switch to boot into RCM (recovery mode). The Switch should show black screen, but `TegraRcmGUI` should turn green saying "RCM OK".
 * Inject the Hekate payload. This launches Hekate on Switch.
 
