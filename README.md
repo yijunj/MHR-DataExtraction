@@ -10,7 +10,8 @@ This project starts with unpacked game data, so rather than working on the .pak 
 * There could be multiple raw files, with extensions like .xc0 or .xc1. Merge them into one .xci file. Merging is as easy as running the `copy /b "File1.xc0" + "File2.xc1" "FileOutput.xci"` command.
 * Use [hactool](https://github.com/SciresM/hactool) to unpack the .xci file and obtain a .pak file (default name is re_chunk_000.pak).
 * Use [REtool](https://residentevilmodding.boards.net/thread/10567/pak-tex-editing-tool) to unpack the .pak file and obtain the desired nested folders of game data. You will need a file list, which can be found [here](https://raw.githubusercontent.com/mhvuze/MonsterHunterRiseModding/main/files/mhrise.list). Save the following code as a batch (.bat) file and drag your .pak file over it to unpack.
-```@setlocal enableextensions
+```
+@setlocal enableextensions
 @pushd %~dp0
 .\REtool.exe -h mhrise.list -x -skipUnknowns %1
 @popd
